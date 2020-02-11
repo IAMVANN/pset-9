@@ -1,13 +1,18 @@
 ///////////////////// CONSTANTS /////////////////////////////////////
 const brick = {
-    value : 1
+    hp : 1,
+    value : undefined;
 }
 const paddle = {
-    center : undefined
+    center : undefined,
+    value : undefined
+
 }
+const quantity;
 ///////////////////// APP STATE (VARIABLES) /////////////////////////
 
 let start;
+
 ///////////////////// CACHED ELEMENT REFERENCES /////////////////////
 let breakboard = document.getElementById('bREAKBOARD');
 let breaker = document.getElementById("bREAK");
@@ -26,5 +31,7 @@ function init(object){
     } else {
         return;
     }
-    remove start;
+    start.remove();
+    breaker.add(paddle)
+
 }
