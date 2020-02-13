@@ -1,20 +1,23 @@
 ///////////////////// CONSTANTS /////////////////////////////////////
-const box = 4;
+const box = 8;
 
 
 
 ///////////////////// APP STATE (VARIABLES) /////////////////////////
 
 let start;
-let canvas = undefined;
+let started = undefined;
+
+let game = setInterval(draw, 100);
+
+
 ///////////////////// CACHED ELEMENT REFERENCES /////////////////////
 let breakboard = document.getElementById('bREAKBOARD');
+let canvas = breakboard.getContext("2d");
 let breaker = document.getElementById("bREAK");
 let paddle = {
-    x1 : box * 123,
-    x2 : box * 133,
-    y1 : box * 10,
-    y2 : box * 8
+    x1 : box * 61.5,
+    y1 : box * 60,
 }
 let turn = "Nothing";
 ///////////////////// EVENT LISTENERS ///////////////////////////////
@@ -29,17 +32,40 @@ document.addEventListener("keydown", direction);
 
 ///////////////////// FUNCTIONS /////////////////////////////////////
 function init(object){
-    canvas = bREAKBOARD.getContext("2d");
-    canvas.clearRect(0, 0, 1024, 500);
+    if(object.target == start){
+        started = true;
+        console.log("RA")
+        start.remove();
+
+        canvas.clearRect(0, 0, 1024, 500);
+    }
 }
 function draw(){
-    if()
+    canvas.clearRect(0, 0, 1024, 500);
+    if(started == true){
+        if (turn == "left"){
+            turn = "nothing";
+            paddle.x1 -= box;
+            paddle.x2 -= box;
+        } else if ( turn == "right"){
+            turn = "nothing";
+            paddle.x1 += box;
+            paddle.x2 += box;
+        }
+        canvas.beginPath();
+        canvas.rect(paddle.x1 , paddle.y1, 40, 10);
+        canvas.stroke();
+
+
+    }
+
 
 }
 function direction(event){
-    if(event.keycode == 37){
+    console.log("ASD")
+    if(event.keyCode == 37){
         turn = "left";
-    } else if (event.keycode == 39){
+    } else if (event.keyCode == 39){
         turn = "right";
     }
 }
