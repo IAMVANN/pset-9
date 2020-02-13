@@ -18,7 +18,7 @@ let breaker = document.getElementById("bREAK");
 let paddle = {
     x1 : box * 61.5,
     y1 : box * 60,
-    range : //put the range of the whole thing here
+    range : undefined//put the range of the whole thing here
 }
 let ball = {
     x : box * 64,
