@@ -19,6 +19,11 @@ let paddle = {
     x1 : box * 61.5,
     y1 : box * 60,
 }
+let ball = {
+    x : box * 64,
+    y : box * 59,
+    r : box 
+}
 let turn = "Nothing";
 ///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = function(){
@@ -41,8 +46,8 @@ function init(object){
     }
 }
 function draw(){
-    canvas.clearRect(0, 0, 1024, 500);
     if(started == true){
+        canvas.clearRect(0, 0, 1024, 500);
         if (turn == "left"){
             turn = "nothing";
             paddle.x1 -= box;
@@ -54,6 +59,9 @@ function draw(){
         }
         canvas.beginPath();
         canvas.rect(paddle.x1 , paddle.y1, 40, 10);
+        canvas.stroke();
+        canvas.beginPath();
+        canvas.arc(ball.x, ball.y , ball.r, 0, 2 * Math.PI);
         canvas.stroke();
 
 
