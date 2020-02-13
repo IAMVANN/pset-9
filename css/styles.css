@@ -1,5 +1,5 @@
 #bREAKBOARD {
-
+    background-color: black;
 
 }
 #start {
@@ -9,7 +9,7 @@
     outline-color: lightgray;
     width : 150px;
     color: white;
-    position : relative;
+    position : absolute;
     bottom : 300px;
     left: 500px;
 }

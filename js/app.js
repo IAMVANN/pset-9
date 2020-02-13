@@ -1,21 +1,22 @@
 ///////////////////// CONSTANTS /////////////////////////////////////
-const brick = {
-    hp : 1,
-    value : undefined;
-}
-const paddle = {
-    center : undefined,
-    value : undefined
+const box = 4;
 
-}
-const quantity;
+
+
 ///////////////////// APP STATE (VARIABLES) /////////////////////////
 
 let start;
-
+let canvas = undefined;
 ///////////////////// CACHED ELEMENT REFERENCES /////////////////////
 let breakboard = document.getElementById('bREAKBOARD');
 let breaker = document.getElementById("bREAK");
+let paddle = {
+    x1 : box * 123,
+    x2 : box * 133,
+    y1 : box * 10,
+    y2 : box * 8
+}
+let turn = "Nothing";
 ///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = function(){
     start = document.createElement("h2");
@@ -24,14 +25,21 @@ window.onload = function(){
     breaker.append(start);
 }
 breaker.onclick = init;
+document.addEventListener("keydown", direction);
+
 ///////////////////// FUNCTIONS /////////////////////////////////////
 function init(object){
-    let thingy = object.target;
-    if(thingy == start){
-    } else {
-        return;
-    }
-    start.remove();
-    breaker.add(paddle)
+    canvas = bREAKBOARD.getContext("2d");
+    canvas.clearRect(0, 0, 1024, 500);
+}
+function draw(){
+    if()
 
+}
+function direction(event){
+    if(event.keycode == 37){
+        turn = "left";
+    } else if (event.keycode == 39){
+        turn = "right";
+    }
 }
