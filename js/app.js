@@ -18,11 +18,12 @@ let breaker = document.getElementById("bREAK");
 let paddle = {
     x1 : box * 61.5,
     y1 : box * 60,
+    range : //put the range of the whole thing here
 }
 let ball = {
     x : box * 64,
     y : box * 59,
-    r : box 
+    r : box
 }
 let turn = "Nothing";
 ///////////////////// EVENT LISTENERS ///////////////////////////////
@@ -56,6 +57,9 @@ function draw(){
             turn = "nothing";
             paddle.x1 += box;
             paddle.x2 += box;
+        }
+        if(ball.x & ball.y = ){
+
         }
         canvas.beginPath();
         canvas.rect(paddle.x1 , paddle.y1, 40, 10);
