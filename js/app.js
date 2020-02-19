@@ -9,8 +9,10 @@ let start;
 let started = undefined;
 
 let game = setInterval(draw, 100);
-let motion = "init"
-
+let motion = "init";
+let reason;
+let rise;
+let run;
 ///////////////////// CACHED ELEMENT REFERENCES /////////////////////
 let breakboard = document.getElementById('bREAKBOARD');
 let canvas = breakboard.getContext("2d");
@@ -94,7 +96,8 @@ function direction(event){
 }
 function ballmecanics(){
     if(ball.xrange < paddle.xrange && ball.x > paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
-        motion = "bounceinit"
+        motion = "bounceinit";
+        reason = "paddle";
     }
     if(motion == "init"){
     //    FALL DOWN 9 boxes
@@ -111,7 +114,15 @@ function ballmecanics(){
             y = 0;
         }
     }
-    if(motion = "bounceinit")
+    if(motion == "bounceinit"){
+        if(reason == paddle){
+            angle = 180 * Math.random();
+            let tangent = Math.tan(angle);
+            run = box;
+            rise = run * tangent;
+
+        }
+    }
     ball.x = xvelo;
     ball.y = yvelo;
     ball.xrange =  ball.x + ball.r;
