@@ -115,13 +115,17 @@ function ballmecanics(){
         }
     }
     if(motion == "bounceinit"){
-        if(reason == paddle){
+        if(reason == "paddle"){
             angle = 180 * Math.random();
             let tangent = Math.tan(angle);
             run = box;
             rise = run * tangent;
-
+            motion = "bounce";
         }
+    }
+    if(motion == "bounce"){
+        xvelo += run;
+        yvelo += rise;
     }
     ball.x = xvelo;
     ball.y = yvelo;
