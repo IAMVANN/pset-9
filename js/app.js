@@ -8,7 +8,7 @@ const box = 8;
 let start;
 let started = undefined;
 
-let game = setInterval(draw, 100);
+let game = setInterval(draw, 25);
 let motion = "init";
 let reason;
 let rise;
@@ -45,7 +45,7 @@ let turn = "Nothing";
 window.onload = function(){
     start = document.createElement("h2");
     start.id = "start";
-    start.innerHTML = "New text!";
+    start.innerHTML = "Start";
     breaker.append(start);
 }
 breaker.onclick = init;
@@ -55,7 +55,6 @@ document.addEventListener("keydown", direction);
 function init(object){
     if(object.target == start){
         started = true;
-        console.log("RA")
         start.remove();
 
         canvas.clearRect(0, 0, 1024, 500);
@@ -87,7 +86,6 @@ function draw(){
 
 }
 function direction(event){
-    console.log("ASD")
     if(event.keyCode == 37){
         turn = "left";
     } else if (event.keyCode == 39){
@@ -95,9 +93,26 @@ function direction(event){
     }
 }
 function ballmecanics(){
-    if(ball.xrange < paddle.xrange && ball.x > paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
+    if(ball.xrange <= paddle.xrange && ball.xrange >= paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
         motion = "bounceinit";
         reason = "paddle";
+    }
+    if(ball.xrange >= 1024 ){
+        motion = "bounceinit";
+        reason = "right";
+    }
+    if(ball.xrange <= 2 * box){
+        motion = "bounceinit";
+        reason = "left";
+
+    }
+    if(ball.yrange <= 2* box){
+        motion = "bounceinit";
+        reason = "top";
+    }
+    if(ball.yrange >= 500){
+        loser();
+        return;
     }
     if(motion == "init"){
     //    FALL DOWN 9 boxes
@@ -116,12 +131,87 @@ function ballmecanics(){
     }
     if(motion == "bounceinit"){
         if(reason == "paddle"){
-            angle = 180 * Math.random();
-            let tangent = Math.tan(angle);
-            run = box;
-            rise = run * tangent;
+            let rando = 5 * Math.random();
+            if(rando < 1){
+                run = -5;
+                rise = -3;
+            } else if (rando < 2){
+                run = -3;
+                rise = -5;
+            } else if (rando < 3){
+                run = 4;
+                rise = -4;
+            } else if (rando < 4){
+                run = 3;
+                rise = -5;
+            } else {
+                run = 5;
+                rise = -3;
+            }
             motion = "bounce";
         }
+        if(reason == "right"){
+            let rando = 5 * Math.random();
+            if(rando < 1){
+                run = -3;
+                rise = -5;
+            } else if (rando < 2){
+                run = -5;
+                rise = -3;
+            } else if (rando < 3){
+                run = 4;
+                rise = -4;
+            } else if (rando < 4){
+                run = -5;
+                rise = 3;
+            } else {
+                run = -3;
+                rise = 5;
+            }
+            motion = "bounce";
+        }
+        if(reason == "left"){
+            let rando = 5 * Math.random();
+            if(rando < 1){
+                run = 3;
+                rise = -5;
+            } else if (rando < 2){
+                run = 5;
+                rise = -3;
+            } else if (rando < 3){
+                run = 4;
+                rise = 4;
+            } else if (rando < 4){
+                run = 5;
+                rise = 3;
+            } else {
+                run = 3;
+                rise = 5;
+            }
+            motion = "bounce";
+        }
+        if(reason == "top"){
+            let rando = 5 * Math.random();
+            if(rando < 1){
+                run = -5;
+                rise = 3;
+            } else if (rando < 2){
+                run = -3;
+                rise = 5;
+            } else if (rando < 3){
+                run = 4;
+                rise = -4;
+            } else if (rando < 4){
+                run = 3;
+                rise = 5;
+            } else {
+                run = 5;
+                rise = 3;
+            }
+            motion = "bounce";
+
+        }
+
     }
     if(motion == "bounce"){
         xvelo += run;
@@ -131,6 +221,21 @@ function ballmecanics(){
     ball.y = yvelo;
     ball.xrange =  ball.x + ball.r;
     ball.yrange = ball.y + ball.r;
-    console.log(motion)
+    console.log(reason)
 
+}
+function loser(){
+    started = false;
+    canvas.clearRect(0, 0, 1024, 500);
+    loseScreen = document.createElement("div");
+    loseScreen.class = "container";
+    start = document.createElement("h2");
+    start.id = "start";
+    start.innerHTML = "Restart";
+    text = document.createElement("h2");
+    text.id = "text";
+    text.innerHTML = "YOU LOSE !!!!";
+    loseScreen.append(start);
+    loseScreen.prepend(text)
+    breaker.append(loseScreen);
 }

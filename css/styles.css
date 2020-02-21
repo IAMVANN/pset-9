@@ -1,5 +1,6 @@
 #bREAKBOARD {
-
+    x : 50;
+    y : 20;
 
 }
 #start {
@@ -12,4 +13,11 @@
     position : absolute;
     bottom : 300px;
     left: 500px;
+}
+.container {
+    background-color: Blue;
+    width : 1024;
+    height : 512;
+    x : 50;
+    y : 20;
 }
