@@ -9,7 +9,7 @@ let start;
 let started = undefined;
 
 let game = setInterval(draw, 25);
-let motion = "init";
+let motion;
 let reason;
 let rise;
 let run;
@@ -17,29 +17,15 @@ let run;
 let breakboard = document.getElementById('bREAKBOARD');
 let canvas = breakboard.getContext("2d");
 let breaker = document.getElementById("bREAK");
-let paddle = {
-    x1 : box * 61.5,
-    y1 : box * 60,
-    xrange : undefined,
-    yrange : undefined
-}
-let xinit = box * 64;
-let yinit =  box * 50;
-let xvelo = xinit;
-let yvelo = yinit;
+let paddle;
+let xinit;
+let yinit;
+let xvelo;
+let yvelo;
 let x;
 let y;
-paddle.xrange = 40 + paddle.x1;
-paddle.yrange = 10 + paddle.y1;
-let ball = {
-    x : xvelo,
-    y : yvelo,
-    r : box,
-    xrange : undefined,
-    yrange : undefined
-}
-ball.xrange =  ball.x + ball.r;
-ball.yrange = ball.y + ball.r;
+
+let ball;
 let turn = "Nothing";
 ///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = function(){
@@ -58,6 +44,28 @@ function init(object){
         start.remove();
 
         canvas.clearRect(0, 0, 1024, 500);
+        paddle = {
+            x1 : box * 61.5,
+            y1 : box * 60,
+            xrange : undefined,
+            yrange : undefined
+        }
+        xinit = box * 64;
+        yinit =  box * 50;
+        xvelo = xinit;
+        yvelo = yinit;
+        paddle.xrange = 40 + paddle.x1;
+        paddle.yrange = 10 + paddle.y1;
+        ball = {
+            x : xvelo,
+            y : yvelo,
+            r : box,
+            xrange : undefined,
+            yrange : undefined
+        }
+        ball.xrange =  ball.x + ball.r;
+        ball.yrange = ball.y + ball.r;
+        motion = "init";
     }
 }
 function draw(){
@@ -117,6 +125,7 @@ function ballmecanics(){
     if(motion == "init"){
     //    FALL DOWN 9 boxes
     y = -9;
+    x = 0;
     motion = "fall";
     alert("RAN INIT");
     }
@@ -226,7 +235,9 @@ function ballmecanics(){
 }
 function loser(){
     started = false;
-    canvas.clearRect(0, 0, 1024, 500);
+    motion = undefined;
+    reason = undefined;
+    canvas.clearRect(0, 0, 1024, 524);
     loseScreen = document.createElement("div");
     loseScreen.class = "container";
     start = document.createElement("h2");

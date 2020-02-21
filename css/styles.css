@@ -1,6 +1,6 @@
 #bREAKBOARD {
-    x : 50;
-    y : 20;
+    top : 50px;
+    right : 20px;
 
 }
 #start {
@@ -18,6 +18,6 @@
     background-color: Blue;
     width : 1024;
     height : 512;
-    x : 50;
-    y : 20;
+    top : 50px;
+    right : 20px;
 }
