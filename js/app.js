@@ -1,10 +1,10 @@
 ///////////////////// CONSTANTS /////////////////////////////////////
 const box = 8;
 const initArray = [
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 ]
 
 
@@ -12,7 +12,7 @@ const initArray = [
 
 let start;
 let started = undefined;
-
+let array;
 let game = setInterval(draw, 25);
 let motion;
 let reason;
@@ -70,6 +70,7 @@ function init(object){
         }
         ball.xrange =  ball.x + ball.r;
         ball.yrange = ball.y + ball.r;
+        array = initArray;
         motion = "init";
     }
 }
@@ -86,6 +87,7 @@ function draw(){
             paddle.x2 += box;
         }
         ballmecanics();
+        boxers();
         canvas.beginPath();
         canvas.rect(paddle.x1 , paddle.y1, 40, 10);
         canvas.stroke();
@@ -254,4 +256,13 @@ function loser(){
     loseScreen.append(start);
     loseScreen.prepend(text)
     breaker.append(loseScreen);
+}
+function boxers(){
+array.forEach((item, i) => {
+    if(item == "1"){
+        
+    }
+
+});
+
 }
