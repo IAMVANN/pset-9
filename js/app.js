@@ -1,9 +1,9 @@
 ///////////////////// CONSTANTS /////////////////////////////////////
 const box = 8;
 const initArray = [
-    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
-    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
-    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
     [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 ]
 
@@ -258,11 +258,31 @@ function loser(){
     breaker.append(loseScreen);
 }
 function boxers(){
-array.forEach((item, i) => {
-    if(item == "1"){
-        
+    let yVal = [];
+    let xVal = [];
+    let yCount = 0;
+    let xCount = 0;
+    for(yCount; yCount <= 3; yCount++){
+        if(yCount == 0){
+            yVal[yCount] = 32;
+        } else if (yCount == 1){
+            yVal[yCount] = 152;
+        } else if (yCount == 2) {
+            yVal[yCount] = 272;
+        } else if (yCount == 3){
+            yVal[yCount] = 392;
+        }
+        console.log(yCount)
+        for(xCount; xCount <= 9; xCount++){
+            console.log(array[yCount][xCount]);
+            if(array[yCount][xCount] == "1"){
+                xVal[xCount] = 128 + 80 * xCount;
+                canvas.beginPath();
+                canvas.rect(xVal[xCount], yVal[yCount], 80, 56);
+                canvas.stroke();
+            }
+        }
+        xCount = 0;
     }
-
-});
 
 }
