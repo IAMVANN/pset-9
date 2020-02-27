@@ -29,6 +29,8 @@ let xvelo;
 let yvelo;
 let x;
 let y;
+let yVal = [];
+let xVal = [];
 
 let ball;
 let turn = "Nothing";
@@ -59,16 +61,20 @@ function init(object){
         yinit =  box * 50;
         xvelo = xinit;
         yvelo = yinit;
+        yVal = [];
+        xVal = [];
         paddle.xrange = 40 + paddle.x1;
         paddle.yrange = 10 + paddle.y1;
         ball = {
             x : xvelo,
             y : yvelo,
             r : box,
+            xrange2 : undefined,
             xrange : undefined,
             yrange : undefined
         }
         ball.xrange =  ball.x + ball.r;
+        ball.xrange2 = ball.x - ball.r;
         ball.yrange = ball.y + ball.r;
         array = initArray;
         motion = "init";
@@ -108,27 +114,57 @@ function direction(event){
     }
 }
 function ballmecanics(){
-    if(ball.xrange <= paddle.xrange && ball.xrange >= paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
+    let yindex;
+    let xindex;
+  //paddle
+    if(ball.xrange <= paddle.xrange && ball.xrange2 >= paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
         motion = "bounceinit";
         reason = "paddle";
     }
+    if(ball.xrange2 >= paddle.x1 && ball.xrange2 <= paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
+        motion = "bounceinit";
+        reason = "paddle";
+    }
+    // Face up
     if(ball.xrange >= 1024 ){
         motion = "bounceinit";
         reason = "right";
     }
+    //left side
     if(ball.xrange <= 2 * box){
         motion = "bounceinit";
         reason = "left";
-
     }
+    //right side
     if(ball.yrange <= 2* box){
         motion = "bounceinit";
         reason = "top";
     }
+    //box top
+    initArray.forEach((item, i) => {
+        item.forEach((object, a) => {
+          if(object[a] == "1"){
+            if(ball.xrange <= xVal[a] + 80 && ball.xrange >= xVal[a] && ball.yrange <= yVal[i] + 8 && ball.yrange >= yVal[i]){
+              motion = "bounceinit";
+              reason = "paddle";
+              console.log(a)
+            } else if(ball.xrange2 >= xVal[a] && ball.xrange2 <= xVal[a] && ball.yrange < yVal[i] + 8 && ball.yrange >=  yVal[i]){
+              motion = "bounceinit";
+              reason = "paddle";
+              console.log(a)
+            }
+
+          }
+        });
+
+    });
+
+
     if(ball.yrange >= 500){
         loser();
         return;
     }
+
     if(motion == "init"){
     //    FALL DOWN 9 boxes
     y = -9;
@@ -237,7 +273,7 @@ function ballmecanics(){
     ball.y = yvelo;
     ball.xrange =  ball.x + ball.r;
     ball.yrange = ball.y + ball.r;
-    console.log(reason)
+  //  console.log(reason)
 
 }
 function loser(){
@@ -258,25 +294,25 @@ function loser(){
     breaker.append(loseScreen);
 }
 function boxers(){
-    let yVal = [];
-    let xVal = [];
+    yVal = [];
+    xVal = [];
     let yCount = 0;
     let xCount = 0;
     for(yCount; yCount <= 3; yCount++){
         if(yCount == 0){
             yVal[yCount] = 32;
         } else if (yCount == 1){
-            yVal[yCount] = 152;
+            yVal[yCount] = 88;
         } else if (yCount == 2) {
-            yVal[yCount] = 272;
+            yVal[yCount] = 144;
         } else if (yCount == 3){
-            yVal[yCount] = 392;
+            yVal[yCount] = 200;
         }
-        console.log(yCount)
+        //console.log(yCount)
         for(xCount; xCount <= 9; xCount++){
-            console.log(array[yCount][xCount]);
+          //  console.log(array[yCount][xCount]);
             if(array[yCount][xCount] == "1"){
-                xVal[xCount] = 128 + 80 * xCount;
+                xVal[xCount] = 112 + 80 * xCount;
                 canvas.beginPath();
                 canvas.rect(xVal[xCount], yVal[yCount], 80, 56);
                 canvas.stroke();
