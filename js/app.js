@@ -78,6 +78,14 @@ function init(object){
         ball.yrange = ball.y + ball.r;
         array = initArray;
         motion = "init";
+        array.forEach((item, i) => {
+            item.forEach((object, a) => {
+                console.log(object)
+            });
+
+        });
+
+
     }
 }
 function draw(){
@@ -130,29 +138,45 @@ function ballmecanics(){
         motion = "bounceinit";
         reason = "right";
     }
-    //left side
+    //right side
     if(ball.xrange <= 2 * box){
         motion = "bounceinit";
         reason = "left";
     }
-    //right side
+    //left side
     if(ball.yrange <= 2* box){
         motion = "bounceinit";
         reason = "top";
     }
     //box top
-    initArray.forEach((item, i) => {
+    array.forEach((item, i) => {
         item.forEach((object, a) => {
-          if(object[a] == "1"){
+          if(object == "1"){
+              //top
             if(ball.xrange <= xVal[a] + 80 && ball.xrange >= xVal[a] && ball.yrange <= yVal[i] + 8 && ball.yrange >= yVal[i]){
               motion = "bounceinit";
               reason = "paddle";
-              console.log(a)
+
             } else if(ball.xrange2 >= xVal[a] && ball.xrange2 <= xVal[a] && ball.yrange < yVal[i] + 8 && ball.yrange >=  yVal[i]){
               motion = "bounceinit";
               reason = "paddle";
-              console.log(a)
-            }
+              item[a] = "0";
+            //bottom
+            } else if (ball.xrange <= xVal[a] + 80 && ball.xrange >= xVal[a] && ball.yrange - 20 <= yVal[i] + 64  && ball.yrange - 20 >= yVal[i]  + 56){
+              motion = "bounceinit";
+              reason = "top";
+              item[a] = "0";
+
+          } else if (ball.xrange <= xVal[a] + 8 && ball.xrange >= xVal[a] && ball.yrange - 20 <= yVal[i] + 56  && ball.yrange - 20 >= yVal[i]) {
+              motion = "bounceinit";
+              reason = "right";
+              item[a] = "0";
+          } else if (ball.xrange <= xVal[a] + 88 && ball.xrange >= xVal[a] + 80 && ball.yrange - 20 <= yVal[i] + 56  && ball.yrange - 20 >= yVal[i]){
+              motion = "bounceinit";
+              reason = "left";
+              item[a] = "0";
+          }
+
 
           }
         });
@@ -170,7 +194,6 @@ function ballmecanics(){
     y = -9;
     x = 0;
     motion = "fall";
-    alert("RAN INIT");
     }
     if(motion == "fall"){
         if(y < -1){
@@ -310,7 +333,7 @@ function boxers(){
         }
         //console.log(yCount)
         for(xCount; xCount <= 9; xCount++){
-          //  console.log(array[yCount][xCount]);
+
             if(array[yCount][xCount] == "1"){
                 xVal[xCount] = 112 + 80 * xCount;
                 canvas.beginPath();
