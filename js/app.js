@@ -1,10 +1,10 @@
 ///////////////////// CONSTANTS /////////////////////////////////////
 const box = 8;
 const initArray = [
-    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    [ "1", "1", "1", "1", "1", "1", "1", "1"],
+    [ "1", "1", "1", "1", "1", "1", "1", "1"],
+    [ "1", "1", "1", "1", "1", "1", "1", "1"],
+    [ "1", "1", "1", "1", "1", "1", "1", "1"]
 ]
 
 
@@ -13,7 +13,7 @@ const initArray = [
 let start;
 let started = undefined;
 let array;
-let game = setInterval(draw, 75);
+let game = setInterval(draw, 35);
 let motion;
 let reason;
 let rise;
@@ -274,7 +274,7 @@ function ballmecanics(){
                 rise = 5;
             } else if (rando < 3){
                 run = 4;
-                rise = -4;
+                rise = 4;
             } else if (rando < 4){
                 run = 3;
                 rise = 5;
@@ -322,20 +322,12 @@ function boxers(){
     let yCount = 0;
     let xCount = 0;
     for(yCount; yCount <= 3; yCount++){
-        if(yCount == 0){
-            yVal[yCount] = 32;
-        } else if (yCount == 1){
-            yVal[yCount] = 88;
-        } else if (yCount == 2) {
-            yVal[yCount] = 144;
-        } else if (yCount == 3){
-            yVal[yCount] = 200;
-        }
+        yVal[yCount] = 24 + 80 * yCount;
         //console.log(yCount)
-        for(xCount; xCount <= 9; xCount++){
+        for(xCount; xCount <= 7; xCount++){
 
             if(array[yCount][xCount] == "1"){
-                xVal[xCount] = 112 + 80 * xCount;
+                xVal[xCount] = 80 + 96 * xCount;
                 canvas.beginPath();
                 canvas.rect(xVal[xCount], yVal[yCount], 80, 56);
                 canvas.stroke();
