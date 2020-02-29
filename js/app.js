@@ -76,11 +76,12 @@ function init(object){
         ball.xrange =  ball.x + ball.r;
         ball.xrange2 = ball.x - ball.r;
         ball.yrange = ball.y + ball.r;
+        console.log("ran")
         array = initArray;
         motion = "init";
         array.forEach((item, i) => {
             item.forEach((object, a) => {
-                console.log(object)
+                item[a] = "1";
             });
 
         });
@@ -125,7 +126,7 @@ function ballmecanics(){
     let yindex;
     let xindex;
   //paddle
-    if(ball.xrange <= paddle.xrange && ball.xrange2 >= paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
+    if(ball.xrange <= paddle.xrange && ball.xrange >= paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
         motion = "bounceinit";
         reason = "paddle";
     }
@@ -156,7 +157,7 @@ function ballmecanics(){
             if(ball.xrange <= xVal[a] + 80 && ball.xrange >= xVal[a] && ball.yrange <= yVal[i] + 8 && ball.yrange >= yVal[i]){
               motion = "bounceinit";
               reason = "paddle";
-
+              item[a] = "0";
             } else if(ball.xrange2 >= xVal[a] && ball.xrange2 <= xVal[a] && ball.yrange < yVal[i] + 8 && ball.yrange >=  yVal[i]){
               motion = "bounceinit";
               reason = "paddle";
