@@ -95,11 +95,11 @@ function draw(){
         if (turn == "left"){
             turn = "nothing";
             paddle.x1 -= box;
-            paddle.x2 -= box;
+            paddle.xrange -= box;
         } else if ( turn == "right"){
             turn = "nothing";
             paddle.x1 += box;
-            paddle.x2 += box;
+            paddle.xrange += box;
         }
         ballmecanics();
         boxers();
@@ -125,27 +125,24 @@ function direction(event){
 function ballmecanics(){
     let yindex;
     let xindex;
-  //paddle
+    console.log(paddle.x1 + "," + paddle.xrange)
+    console.log(ball.xrange2)
     if(ball.xrange <= paddle.xrange && ball.xrange >= paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
         motion = "bounceinit";
         reason = "paddle";
-    }
-    if(ball.xrange2 >= paddle.x1 && ball.xrange2 <= paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
+        console.log("a")
+    } else if(ball.xrange2 >= paddle.x1 && ball.xrange2 <= paddle.xrange && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1){
+        //(ball.xrange2 >= paddle.x1 && ball.xrange2 <= paddle.x1 && ball.yrange < paddle.yrange && ball.yrange >= paddle.y1)
         motion = "bounceinit";
         reason = "paddle";
-    }
-    // Face up
-    if(ball.xrange >= 1024 ){
+        console.log("b")
+    } else if(ball.xrange >= 1024 ){
         motion = "bounceinit";
         reason = "right";
-    }
-    //right side
-    if(ball.xrange <= 2 * box){
+    } else if(ball.xrange <= 2 * box){
         motion = "bounceinit";
         reason = "left";
-    }
-    //left side
-    if(ball.yrange <= 2* box){
+    } else if(ball.yrange <= 2* box){
         motion = "bounceinit";
         reason = "top";
     }
@@ -158,7 +155,7 @@ function ballmecanics(){
               motion = "bounceinit";
               reason = "paddle";
               item[a] = "0";
-            } else if(ball.xrange2 >= xVal[a] && ball.xrange2 <= xVal[a] && ball.yrange < yVal[i] + 8 && ball.yrange >=  yVal[i]){
+          } else if(ball.xrange2 >= xVal[a] && ball.xrange2 <= xVal[a] + 80 && ball.yrange < yVal[i] + 8 && ball.yrange >=  yVal[i]){
               motion = "bounceinit";
               reason = "paddle";
               item[a] = "0";
@@ -296,6 +293,7 @@ function ballmecanics(){
     ball.x = xvelo;
     ball.y = yvelo;
     ball.xrange =  ball.x + ball.r;
+    ball.xrange2 = ball.x-ball.r
     ball.yrange = ball.y + ball.r;
   //  console.log(reason)
 
