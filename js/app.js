@@ -13,7 +13,7 @@ const initArray = [
 let start;
 let started = undefined;
 let array;
-let game = setInterval(draw, 35);
+let game = setInterval(draw, 25);
 let motion;
 let reason;
 let rise;
@@ -102,6 +102,7 @@ function draw(){
         }
         ballmecanics();
         boxers();
+        winner();
         canvas.beginPath();
         canvas.rect(paddle.x1 , paddle.y1, 80, 10);
         canvas.stroke();
@@ -324,7 +325,7 @@ function boxers(){
     for(yCount; yCount <= 3; yCount++){
         yVal[yCount] = 24 + 80 * yCount;
         //console.log(yCount)
-        for(xCount; xCount <= 7; xCount++){
+        for(xCount; xCount <= 9; xCount++){
 
             if(array[yCount][xCount] == "1"){
                 xVal[xCount] = 80 + 96 * xCount;
@@ -336,4 +337,39 @@ function boxers(){
         xCount = 0;
     }
 
+}
+function winner(){
+    let counter = 0;
+    array.forEach((item, i) => {
+        item.forEach((object, d) => {
+            if(object == "0"){
+
+            } else {
+                counter++;
+                console.log(counter);
+            }
+        });
+
+    });
+    console.log("winner ran")
+    if(counter == "0"){
+        started = false;
+        motion = undefined;
+        reason = undefined;
+        canvas.clearRect(0, 0, 1024, 524);
+        winScreen = document.createElement("div");
+        winScreen.class = "container";
+        start = document.createElement("h2");
+        start.id = "start";
+        start.innerHTML = "Restart";
+        text = document.createElement("h2");
+        text.id = "text";
+        text.innerHTML = "YOU WIN!!!";
+        loseScreen.append(start);
+        loseScreen.prepend(text)
+        breaker.append(winScreen);
+
+    } else {
+        return;
+    }
 }
