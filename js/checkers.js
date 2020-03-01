@@ -19,13 +19,23 @@ let turn;
 let board = document.getElementById("board");
 let boardArray = board.childNodes;
 console.log(board);
+
 ///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = init;
-function init(){
-    array = initArray;
-    turn = startTurn;
+board.onclick = move();
 
-}
 
 
 ///////////////////// FUNCTIONS /////////////////////////////////////
+function init(){
+    array = initArray;
+    boardArray.forEach((item, i) => {
+        let y = 64w
+
+    });
+
+    turn = startTurn;
+}
+function move(e){
+    let target = e.target;
+}
