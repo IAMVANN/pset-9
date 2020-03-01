@@ -15,11 +15,9 @@ let win;
 let lose;
 let startTurn = "player1";
 let turn;
+let pArray;//piece array
 ///////////////////// CACHED ELEMENT REFERENCES /////////////////////
-let board = document.getElementById("board");
-let boardArray = board.childNodes;
-console.log(board);
-
+let board = document.getElementById("Checkboard");
 ///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = init;
 board.onclick = move();
@@ -29,8 +27,23 @@ board.onclick = move();
 ///////////////////// FUNCTIONS /////////////////////////////////////
 function init(){
     array = initArray;
-    boardArray.forEach((item, i) => {
-        let y = 64w
+    array.forEach((item, i) => {
+        let y = 64 * i;
+        pArray[y].yval = y;
+        item.forEach((object, o) => {
+            let x = 64 * o;
+            pArray[y][x].xval = x;
+            pArray[y][x].yval = y;
+            if(object == 0){
+                pArray[y][x].value = "none";
+            } else if(object == 1){
+                pArray[y][x].value = "player1";
+            } else if(object == 2){
+                pArray[y][x].value = "player2";
+            }
+        });
+
+
 
     });
 
