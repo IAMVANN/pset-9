@@ -41,6 +41,7 @@ function init(){
             } else if(object == 2){
                 pArray[y][x].value = "player2";
             }
+            console.log(pArray[y][x])
         });
 
 
