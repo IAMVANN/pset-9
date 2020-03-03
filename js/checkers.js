@@ -199,7 +199,7 @@ function highlighter(who){
                 return2 = false;
                 return;
             }
-             value[0] = value[0] + 9;
+             value[0] = value[0] + 7;
                     highlight(value[0]);
         } else {
             let value = [current + 7, current + 9];
