@@ -149,7 +149,7 @@ function highlighter(who){
                 return2 = false;
                 return;
             }
-
+            highlight(value[0])
         } else if(current % 7 == 0){
             let value = [current + 7];
             //DO THIS NEXt, far right for DINO
@@ -198,10 +198,55 @@ function highlighter(who){
                 return2 = false;
                 return;
             }
+             value[0] = value[0] + 9;
+                    highlight(value[0]);
         } else {
             let value = [current + 7, current + 9];
-            let thing = true;
-            let tihng2 = true;
+            let thing = undefined;
+            let thing2 = undefined;
+            let run = false;
+            for(i = dArray.length -1; i >= 0; i++){
+                if(dArray[i].pos == value[0]){
+                thing = false;
+                }
+                if(dArray[i].pos == value[1]){
+                thing2 = false
+                }
+            }
+            for(i = sArray.length -1; i>=0; i++){
+                if(sArray[i].pos == value[0]){
+                thing = true;
+                }
+                if(sArray[i].pos == value[1]){
+                thing2 = true
+                }
+            }
+            if(thing == true){
+                for(i = sArray.length -1; i>=0; i++){
+                if(sArray[i].pos == value[0] + 7){
+                    run = true;
+                } 
+            }
+                if(run == true){
+                    run = false;
+                } else {
+                highlight(value[0] + 7);                          
+                          }
+                 
+            } 
+            if(thing2 == true){
+            for(i = sArray.length -1; i>=0; i++){
+                if(sArray[i].pos == value[0] + 9){
+                    run = true;
+                } 
+            }
+                if(run == true){
+                    run = false;
+                } else {
+                highlight(value[0] + 9);                          
+                          }
+                 
+            }
         }
     }
 
