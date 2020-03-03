@@ -85,6 +85,7 @@ function takeTurn(e){
         } else if(spots[b].className == ¨black spot){
             spots[b].style.backgroundColor = ¨black¨;
         }
+    }
 
     for(let b = 0; b < 64; b++){
         if(spots[b] == target){
