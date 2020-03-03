@@ -100,6 +100,9 @@ function takeTurn(e){
     }
 }
 function highlighter(who){
+    for(let b = 0; b < 64 ; b++){
+        spots[b].style.backgroundColor = inherit; 
+    }
     if(who == "dino"){
         if(current % 8 == 0){
             //highlight
@@ -190,8 +193,8 @@ function highlighter(who){
                     });
                     value[0] = value[0] + 7;
                     highlight(value[0]);
-
-
+                } else {
+                highlight(value[0]);
                 }
 
             });
