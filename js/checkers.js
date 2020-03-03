@@ -213,12 +213,17 @@ function highlighter(who){
                 thing2 = false
                 }
             }
+            
             for(i = sArray.length -1; i>=0; i++){
-                if(sArray[i].pos == value[0]){
-                thing = true;
+                if(thing !== false){
+                    if(sArray[i].pos == value[0]){
+                    thing = true;
+                    }
                 }
-                if(sArray[i].pos == value[1]){
-                thing2 = true
+                if(thing2 !== false){
+                    if(sArray[i].pos == value[1]){
+                    thing2 = true;
+                    }
                 }
             }
             if(thing == true){
@@ -233,7 +238,7 @@ function highlighter(who){
                 highlight(value[0] + 7);                          
                           }
                  
-            } 
+            }
             if(thing2 == true){
             for(i = sArray.length -1; i>=0; i++){
                 if(sArray[i].pos == value[1] + 9){
@@ -245,7 +250,12 @@ function highlighter(who){
                 } else {
                 highlight(value[1] + 9);                          
                           }
-                 
+            if(thing == undefined){
+                highlight(value[0]);
+            }
+            if(thing2 == undefined){
+                highlight(value[1]);
+            }
             }
         }
     }
