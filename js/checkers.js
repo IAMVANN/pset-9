@@ -236,14 +236,14 @@ function highlighter(who){
             } 
             if(thing2 == true){
             for(i = sArray.length -1; i>=0; i++){
-                if(sArray[i].pos == value[0] + 9){
+                if(sArray[i].pos == value[1] + 9){
                     run = true;
                 } 
             }
                 if(run == true){
                     run = false;
                 } else {
-                highlight(value[0] + 9);                          
+                highlight(value[1] + 9);                          
                           }
                  
             }
