@@ -150,7 +150,7 @@ function highlighter(who){
                 return;
             }
             highlight(value[0])
-        } else if(current % 7 == 0){
+        } else if((current - 7) % 8 == 0){
             let value = [current + 7];
             //DO THIS NEXt, far right for DINO
               dArray.forEach((item, i) => {
