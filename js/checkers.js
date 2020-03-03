@@ -80,9 +80,9 @@ function takeTurn(e){
 
     target = e.target.parentElement;
     for(let b = 0; b < 64 ; b++){
-        if(spots.className == ¨red spot¨){
+        if(spots[b].className == ¨red spot¨){
             spots[b].style.backgroundColor = ¨red¨;
-        } else if(spots.className == ¨black spot){
+        } else if(spots[b].className == ¨black spot){
             spots[b].style.backgroundColor = ¨black¨;
         }
 
