@@ -100,7 +100,14 @@ function takeTurn(e){
     }
 }
 function highlighter(who){
-   
+    for(let b = 0; b < 64 ; b++){
+        if(spots.className == ¨red spot¨){
+            spots[b].style.backgroundColor = ¨red¨;
+        } else if(spots.className == ¨black spot){
+            spots[b].style.backgroundColor = ¨black¨;
+        }
+        spots[b].style.backgroundColor = ; 
+    }
     if(who == "dino"){
         if(current % 8 == 0){
             //highlight
