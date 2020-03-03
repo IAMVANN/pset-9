@@ -69,6 +69,7 @@ function init(){
     render();
 }
 function render(){
+    console.log(sArray)
     dArray.forEach((item, i) => {
         spots[dArray[i].pos].append(dArray[i].img);
 
@@ -393,7 +394,7 @@ function highlighter(who){
         }
 
     } else {
-        let value = [current + 7, current + 9];
+        let value = [current - 7, current - 9];
         let thing = undefined;
         let thing2 = undefined;
         let run = false;
@@ -420,7 +421,7 @@ function highlighter(who){
         }
         if(thing == true){
             for(i = sArray.length -1; i>=0; i--){
-            if(sArray[i].pos == value[0] + 7){
+            if(sArray[i].pos == value[0] - 7){
                 run = true;
             }
 
@@ -428,20 +429,20 @@ function highlighter(who){
             if(run == true){
                 run = false;
             } else {
-            highlight(value[0] + 7);
+            highlight(value[0] - 7);
                       }
 
         }
         if(thing2 == true){
         for(i = sArray.length -1; i>=0; i--){
-            if(sArray[i].pos == value[1] + 9){
+            if(sArray[i].pos == value[1] - 9){
                 run = true;
             }
         }
             if(run == true){
                 run = false;
             } else {
-            highlight(value[1] + 9);
+            highlight(value[1] - 9);
             }
         }
         if(thing == undefined){
@@ -459,26 +460,29 @@ function highlight(value){
 }
 function move(where){
     let quantity = 0;
+
     //checking for shark removal
     if(where - previousclick.pos > 10){
         if((where - previousclick.pos) % 9 == 0){
-            let bb = (where - previousclick.pos)/9;
-            remove[quantity] = previousclick.pos + 9*b;
+            let bb = (where - previousclick.pos)/18;
+
+            remove[quantity] = previousclick.pos + 9*bb;
             quantity++;
         } if((where - previousclick.pos) % 7 == 0){
-            let bb = (where - previousclick.pos)/7;
-            remove[quantity] = previousclick.pos + 7*b;
+            let bb = (where - previousclick.pos)/14;
+
+            remove[quantity] = previousclick.pos + 7*bb;
             quantity++;
         }
     } else if(previousclick.pos - where < -10){
         //this checks for dino removal
         if((previousclick.pos - work) % 9 == 0){
-            let bb = (previousclick.pos - work)/9;
-            remove[quantity] = previousclick.pos - 9*b;
+            let bb = (previousclick.pos - work)/18;
+            remove[quantity] = previousclick.pos - 9*bb;
             quantity++;
         } if((previousclick.pos - work) % 7 == 0){
-            let bb = (previousclick.pos - work)/7;
-            remove[quantity] = previousclick.pos - 7*b;
+            let bb = (previousclick.pos - work)/14;
+            remove[quantity] = previousclick.pos - 7*bb;
             quantity++;
         }
     }
@@ -489,7 +493,7 @@ function move(where){
         remover();
     }
 
-    quantity = [];
+    remove = [];
     render();
     if(turn == "dino"){
 
@@ -500,15 +504,19 @@ function move(where){
 
 }
 function remover(){
-    for(let m = 0; m < quantity.length; m++){
+    for(let m = 0; m < remove.length; m++){
         for(let b = 0; b < dArray.length; b++){
-            if(dArray[b].pos == quantity[m]){
+            if(dArray[b].pos == remove[m]){
+                dArray[b].img.remove();
                 dArray.splice(b,1);
             }
         }
-        for(let b = 0; b < dArray.length; b++){
-            if(sArray[b].pos == quantity[m]){
+        for(let b = 0; b < sArray.length; b++){
+
+            if(sArray[b].pos == remove[m]){
+                sArray[b].img.remove();
                 sArray.splice(b,1);
+
             }
         }
 
