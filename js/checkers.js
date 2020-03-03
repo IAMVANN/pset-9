@@ -28,6 +28,7 @@ let spots = document.getElementsByClassName("spot");
 
 ///////////////////// FUNCTIONS /////////////////////////////////////
 function init(){
+    alert(¨Update in¨);
     turn = startTurn;
     for(let i = 0; i < 12; i++ ){
 
