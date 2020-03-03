@@ -215,7 +215,7 @@ function highlighter(who){
                 }
             }
             
-            for(i = sArray.length -1; i>=0; i--){
+            for(i = sArray.length - 1; i >= 0; i--){
                 if(thing !== false){
                     if(sArray[i].pos == value[0]){
                     thing = true;
@@ -232,6 +232,7 @@ function highlighter(who){
                 if(sArray[i].pos == value[0] + 7){
                     run = true;
                 } 
+                
             }
                 if(run == true){
                     run = false;
@@ -250,13 +251,13 @@ function highlighter(who){
                     run = false;
                 } else {
                 highlight(value[1] + 9);                          
-                          }
+                }
+            }
             if(thing == undefined){
                 highlight(value[0]);
             }
             if(thing2 == undefined){
                 highlight(value[1]);
-            }
             }
         }
     }
