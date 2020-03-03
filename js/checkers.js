@@ -153,8 +153,55 @@ function highlighter(who){
         } else if(current % 7 == 0){
             let value = [current + 7];
             //DO THIS NEXt, far right for DINO
+              dArray.forEach((item, i) => {
+
+                if(item.pos == value[0]){
+                    return2 = true;
+                    return ;
+                }
+            });
+            if(return2 == true){
+                return2 = false;
+                return;
+            }
+            console.log("asf")
+            sArray.forEach((item, i) => {
+
+                if(item.pos == value[0]){
+                    sArray.forEach((object, o) => {
+                        if(object.pos == value[0] + 7){
+                            return3 = true;
+                            return;
+                        }
+                    });
+                    if(return3 == true){
+                        return2 = true;
+                        return3 == false;
+                        return;
+                    }
+
+
+                    dArray.forEach((object, o) => {
+                        if(object.pos == value[0] + 7){
+                            return2 = true;
+                            return;
+                        }
+                    });
+                    value[0] = value[0] + 7;
+                    highlight(value[0]);
+
+
+                }
+
+            });
+            if(return2 == true){
+                return2 = false;
+                return;
+            }
         } else {
             let value = [current + 7, current + 9];
+            let thing = true;
+            let tihng2 = true;
         }
     }
 
