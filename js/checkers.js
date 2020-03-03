@@ -15,8 +15,10 @@ let current;
 let board = document.getElementById("Checkboard");
 let dArray = [];
 let sArray = [];
+let remove = [];
 let return2 = false;
 let return3 = false;
+let previousclick;
 ///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = init;
 board.onclick = takeTurn;
@@ -28,7 +30,7 @@ let spots = document.getElementsByClassName("spot");
 
 ///////////////////// FUNCTIONS /////////////////////////////////////
 function init(){
-    
+
     turn = startTurn;
     for(let i = 0; i < 12; i++ ){
 
@@ -77,23 +79,37 @@ function render(){
 
 }
 function takeTurn(e){
-
+    let needsTobetrue = false;
     target = e.target.parentElement;
     for(let b = 0; b < 64 ; b++){
-        if(spots[b].className == ¨red spot¨){
-            spots[b].style.backgroundColor = ¨red¨;
-        } else if(spots[b].className == ¨black spot){
-            spots[b].style.backgroundColor = ¨black¨;
+        if(spots[b].style.backgroundColor == "gray"){
+            if(spots[b] == e.target){
+
+                move(b);
+                needsTobetrue = true;
+            }
+        }
+    }
+    for(let b = 0; b < 64 ; b++){
+        if(spots[b].className == "red spot"){
+            spots[b].style.backgroundColor = "red";
+        } else if(spots[b].className == "black spot"){
+            spots[b].style.backgroundColor = "black";
         }
     }
 
+
+    if(needsTobetrue == true){
+
+        return;
+    }
     for(let b = 0; b < 64; b++){
         if(spots[b] == target){
 
             if (turn == "dino") {
                 for(let i = dArray.length - 1; i >= 0; i--){
                     if(dArray[i].pos == b){
-                        console.log("asdf")
+                        previousclick = dArray[i];
                         current = dArray[i].pos;
                         highlighter("dino");
                     }
@@ -101,14 +117,23 @@ function takeTurn(e){
 
             } else if (turn == "shark"){
 
+                for(let i = sArray.length - 1; i >= 0; i--){
+                    if(sArray[i].pos == b){
+
+                        previousclick = sArray[i];
+                        current = sArray[i].pos;
+
+                        highlighter("shark");
+                    }
+                }
+
             }
         }
     }
 }
 function highlighter(who){
-    
-        spots[b].style.backgroundColor = ; 
-    }
+
+
     if(who == "dino"){
         if(current % 8 == 0){
             //highlight
@@ -125,7 +150,7 @@ function highlighter(who){
                 return2 = false;
                 return;
             }
-            console.log("asf")
+
             sArray.forEach((item, i) => {
 
                 if(item.pos == value[0]){
@@ -150,8 +175,6 @@ function highlighter(who){
                     });
                     value[0] = value[0] + 9;
                     highlight(value[0]);
-
-
                 }
 
             });
@@ -174,7 +197,7 @@ function highlighter(who){
                 return2 = false;
                 return;
             }
-            console.log("asf")
+
             sArray.forEach((item, i) => {
 
                 if(item.pos == value[0]){
@@ -208,8 +231,7 @@ function highlighter(who){
                 return2 = false;
                 return;
             }
-             value[0] = value[0] + 7;
-                    highlight(value[0]);
+
         } else {
             let value = [current + 7, current + 9];
             let thing = undefined;
@@ -223,7 +245,7 @@ function highlighter(who){
                 thing2 = false
                 }
             }
-            
+
             for(i = sArray.length - 1; i >= 0; i--){
                 if(thing !== false){
                     if(sArray[i].pos == value[0]){
@@ -240,26 +262,26 @@ function highlighter(who){
                 for(i = sArray.length -1; i>=0; i--){
                 if(sArray[i].pos == value[0] + 7){
                     run = true;
-                } 
-                
+                }
+
             }
                 if(run == true){
                     run = false;
                 } else {
-                highlight(value[0] + 7);                          
+                highlight(value[0] + 7);
                           }
-                 
+
             }
             if(thing2 == true){
             for(i = sArray.length -1; i>=0; i--){
                 if(sArray[i].pos == value[1] + 9){
                     run = true;
-                } 
+                }
             }
                 if(run == true){
                     run = false;
                 } else {
-                highlight(value[1] + 9);                          
+                highlight(value[1] + 9);
                 }
             }
             if(thing == undefined){
@@ -269,9 +291,227 @@ function highlighter(who){
                 highlight(value[1]);
             }
         }
+    } else if(who == "shark"){
+
+        if(current % 8 == 0){
+            //highlight
+            let value = [current - 7];
+
+            sArray.forEach((item, i) => {
+
+                if(item.pos == value[0]){
+                    return2 = true;
+                    return ;
+                }
+            });
+            if(return2 == true){
+                return2 = false;
+                return;
+            }
+
+            dArray.forEach((item, i) => {
+
+                if(item.pos == value[0]){
+                    dArray.forEach((object, o) => {
+                        if(object.pos == value[0] - 7){
+                            return3 = true;
+                            return;
+                        }
+                    });
+                    if(return3 == true){
+                        return2 = true;
+                        return3 == false;
+                        return;
+                    }
+
+
+                    sArray.forEach((object, o) => {
+                        if(object.pos == value[0] - 7){
+                            return2 = true;
+                            return;
+                        }
+                    });
+                    value[0] = value[0] - 7;
+                    highlight(value[0]);
+                }
+
+            });
+            if(return2 == true){
+                return2 = false;
+                return;
+            }
+            highlight(value[0])
+
+
+    } else if((current + 9) % 8 == 0){
+        let value = [current - 9];
+        //DO THIS NEXt, far right for DINO
+          dArray.forEach((item, i) => {
+
+            if(item.pos == value[0]){
+                return2 = true;
+                return ;
+            }
+        });
+        if(return2 == true){
+            return2 = false;
+            return;
+        }
+
+        sArray.forEach((item, i) => {
+
+            if(item.pos == value[0]){
+                sArray.forEach((object, o) => {
+                    if(object.pos == value[0] - 9){
+                        return3 = true;
+                        return;
+                    }
+                });
+                if(return3 == true){
+                    return2 = true;
+                    return3 == false;
+                    return;
+                }
+
+
+                dArray.forEach((object, o) => {
+                    if(object.pos == value[0] -9){
+                        return2 = true;
+                        return;
+                    }
+                });
+                value[0] = value[0] - 9;
+                highlight(value[0]);
+            } else {
+            highlight(value[0]);
+            }
+
+        });
+        if(return2 == true){
+            return2 = false;
+            return;
+        }
+
+    } else {
+        let value = [current + 7, current + 9];
+        let thing = undefined;
+        let thing2 = undefined;
+        let run = false;
+        for(i = dArray.length -1; i >= 0; i--){
+            if(dArray[i].pos == value[0]){
+            thing = false;
+            }
+            if(dArray[i].pos == value[1]){
+            thing2 = false
+            }
+        }
+
+        for(i = sArray.length - 1; i >= 0; i--){
+            if(thing !== false){
+                if(sArray[i].pos == value[0]){
+                thing = true;
+                }
+            }
+            if(thing2 !== false){
+                if(sArray[i].pos == value[1]){
+                thing2 = true;
+                }
+            }
+        }
+        if(thing == true){
+            for(i = sArray.length -1; i>=0; i--){
+            if(sArray[i].pos == value[0] + 7){
+                run = true;
+            }
+
+        }
+            if(run == true){
+                run = false;
+            } else {
+            highlight(value[0] + 7);
+                      }
+
+        }
+        if(thing2 == true){
+        for(i = sArray.length -1; i>=0; i--){
+            if(sArray[i].pos == value[1] + 9){
+                run = true;
+            }
+        }
+            if(run == true){
+                run = false;
+            } else {
+            highlight(value[1] + 9);
+            }
+        }
+        if(thing == undefined){
+            highlight(value[0]);
+        }
+        if(thing2 == undefined){
+            highlight(value[1]);
+        }
     }
 
+    }
 }
 function highlight(value){
     spots[value].style.backgroundColor = "gray";
+}
+function move(where){
+    let quantity = 0;
+    //checking for shark removal
+    if(where - previousclick.pos > 10){
+        if((where - previousclick.pos) % 9 == 0){
+            let bb = (where - previousclick.pos)/9;
+            remove[quantity] = previousclick.pos + 9*b;
+            quantity++;
+        } if((where - previousclick.pos) % 7 == 0){
+            let bb = (where - previousclick.pos)/7;
+            remove[quantity] = previousclick.pos + 7*b;
+            quantity++;
+        }
+    } else if(previousclick.pos - where < -10){
+        //this checks for dino removal
+        if((previousclick.pos - work) % 9 == 0){
+            let bb = (previousclick.pos - work)/9;
+            remove[quantity] = previousclick.pos - 9*b;
+            quantity++;
+        } if((previousclick.pos - work) % 7 == 0){
+            let bb = (previousclick.pos - work)/7;
+            remove[quantity] = previousclick.pos - 7*b;
+            quantity++;
+        }
+    }
+    previousclick.pos = where;
+    if(quantity == []){
+
+    } else {
+        remover();
+    }
+
+    quantity = [];
+    render();
+    if(turn == "dino"){
+
+        turn = "shark";
+    } else if(turn == "shark"){
+        turn = "dino";
+    }
+
+}
+function remover(){
+    for(let m = 0; m < quantity.length; m++){
+        for(let b = 0; b < dArray.length; b++){
+            if(dArray[b].pos == quantity[m]){
+                dArray.splice(b,1);
+            }
+        }
+        for(let b = 0; b < dArray.length; b++){
+            if(sArray[b].pos == quantity[m]){
+                sArray.splice(b,1);
+            }
+        }
+
+    }
+
 }
