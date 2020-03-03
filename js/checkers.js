@@ -205,7 +205,7 @@ function highlighter(who){
             let thing = undefined;
             let thing2 = undefined;
             let run = false;
-            for(i = dArray.length -1; i >= 0; i++){
+            for(i = dArray.length -1; i >= 0; i--){
                 if(dArray[i].pos == value[0]){
                 thing = false;
                 }
@@ -214,7 +214,7 @@ function highlighter(who){
                 }
             }
             
-            for(i = sArray.length -1; i>=0; i++){
+            for(i = sArray.length -1; i>=0; i--){
                 if(thing !== false){
                     if(sArray[i].pos == value[0]){
                     thing = true;
@@ -227,7 +227,7 @@ function highlighter(who){
                 }
             }
             if(thing == true){
-                for(i = sArray.length -1; i>=0; i++){
+                for(i = sArray.length -1; i>=0; i--){
                 if(sArray[i].pos == value[0] + 7){
                     run = true;
                 } 
@@ -240,7 +240,7 @@ function highlighter(who){
                  
             }
             if(thing2 == true){
-            for(i = sArray.length -1; i>=0; i++){
+            for(i = sArray.length -1; i>=0; i--){
                 if(sArray[i].pos == value[1] + 9){
                     run = true;
                 } 
