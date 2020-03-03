@@ -79,7 +79,12 @@ function render(){
 function takeTurn(e){
 
     target = e.target.parentElement;
-
+    for(let b = 0; b < 64 ; b++){
+        if(spots.className == ¨red spot¨){
+            spots[b].style.backgroundColor = ¨red¨;
+        } else if(spots.className == ¨black spot){
+            spots[b].style.backgroundColor = ¨black¨;
+        }
 
     for(let b = 0; b < 64; b++){
         if(spots[b] == target){
@@ -100,12 +105,7 @@ function takeTurn(e){
     }
 }
 function highlighter(who){
-    for(let b = 0; b < 64 ; b++){
-        if(spots.className == ¨red spot¨){
-            spots[b].style.backgroundColor = ¨red¨;
-        } else if(spots.className == ¨black spot){
-            spots[b].style.backgroundColor = ¨black¨;
-        }
+    
         spots[b].style.backgroundColor = ; 
     }
     if(who == "dino"){
