@@ -152,6 +152,7 @@ function highlighter(who){
 
         } else if(current % 7 == 0){
             let value = [current + 7];
+            //DO THIS NEXt, far right for DINO
         } else {
             let value = [current + 7, current + 9];
         }
