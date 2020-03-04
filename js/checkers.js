@@ -194,7 +194,7 @@ function highlighter(who){
                         }
                         return2 = false;
 
-                        highlight(value[0] - 9);
+                        highlight(value[0]-9);
                     }
 
                 }
