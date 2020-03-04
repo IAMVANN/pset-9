@@ -139,113 +139,136 @@ function highlighter(who){
         if(current % 8 == 0){
             //highlight
 
-            let value = [current + 9];
-            for(let ab == 0; ab <= 3; ab++){
-                dArray.forEach((item, i) => {
+            let value = [current];
+            for(let ab = 0; ab <= 3; ab++){
 
-                    if(item.pos == value[0]){
-                        if(ab == 0){
-                            return2 = true;
-                            return ;
+
+                let a = (value[0] + 18 - (ab * 4)) % 8 ;
+
+                if(ab == 0 || (((value[0] + 18 - (ab * 4)) % 8) && value[0] + 18 <= 63)){
+                    value[0] += 9;
+                    dArray.forEach((item, i) => {
+                        if(item.pos == value[0]){
+                            if(ab == 0){
+                                return2 = true;
+                                return ;
+                            }
                         }
+                    });
+                    if(return2 == true){
+                        return2 = false;
+                        return;
                     }
-                });
-                if(return2 == true){
-                    return2 = false;
-                    return;
-                }
 
-                sArray.forEach((item, i) => {
+                    sArray.forEach((item, i) => {
 
-                    if(item.pos == value[0]){
-                        sArray.forEach((object, o) => {
-                            if(object.pos == value[0] + 9){
-                                return3 = true;
+                        if(item.pos == value[0]){
+                            sArray.forEach((object, o) => {
+                                if(object.pos == value[0] + 9){
+                                    return3 = true;
+                                    return;
+                                }
+                            });
+                            if(return3 == true){
+                                return2 = true;
+                                return3 == false;
                                 return;
                             }
-                        });
-                        if(return3 == true){
-                            return2 = true;
-                            return3 == false;
+
+
+                            dArray.forEach((object, o) => {
+                                if(object.pos == value[0] + 9){
+                                    return2 = true;
+                                    return;
+                                }
+                            });
+
+                            value[0] = value[0] + 9;
+
+                        }
+
+                    });
+                    if(return2 == true || ab == 3){
+
+                        if(ab == 0){
+                            return2 = false;
                             return;
                         }
-
-
-                        dArray.forEach((object, o) => {
-                            if(object.pos == value[0] + 9){
-                                return2 = true;
-                                return;
-                            }
-                        });
-                        value[0] = value[0] + 9;
+                        return2 = false;
 
                         highlight(value[0]);
                     }
 
-                });
-                if(return2 == true){
-                    if(ab == 0){
-                        return2 = false;
-                        return;
-                    }
-                    return2 = false;
-
                 }
-                highlight(value[0]);
+
+
             }
+            highlight(value[0]);
 
 
         } else if((current - 7) % 8 == 0){
             let value = [current + 7];
             //DO THIS NEXt, far right for DINO
-              dArray.forEach((item, i) => {
+            for(let ab = 0; ab <= 3; ab++){
+                if((current - 7) % 8 == 0){
 
-                if(item.pos == value[0]){
-                    return2 = true;
-                    return ;
-                }
-            });
-            if(return2 == true){
-                return2 = false;
-                return;
-            }
 
-            sArray.forEach((item, i) => {
+                      dArray.forEach((item, i) => {
 
-                if(item.pos == value[0]){
-                    sArray.forEach((object, o) => {
-                        if(object.pos == value[0] + 7){
-                            return3 = true;
-                            return;
+                        if(item.pos == value[0]){
+                            return2 = true;
+                            return ;
                         }
                     });
-                    if(return3 == true){
-                        return2 = true;
-                        return3 == false;
+                    if(return2 == true){
+                        return2 = false;
                         return;
                     }
 
+                    sArray.forEach((item, i) => {
 
-                    dArray.forEach((object, o) => {
-                        if(object.pos == value[0] + 7){
-                            return2 = true;
-                            return;
+                        if(item.pos == value[0]){
+                            sArray.forEach((object, o) => {
+                                if(object.pos == value[0] + 7){
+                                    return3 = true;
+                                    return;
+                                }
+                            });
+                            if(return3 == true){
+                                return2 = true;
+                                return3 == false;
+                                return;
+                            }
+
+
+                            dArray.forEach((object, o) => {
+                                if(object.pos == value[0] + 7){
+                                    return2 = true;
+                                    return;
+                                }
+                            });
+                            value[0] = value[0] + 7;
+                            highlight(value[0]);
+                        } else {
+                        highlight(value[0]);
                         }
+
                     });
-                    value[0] = value[0] + 7;
+                    if(ab == 0){
+                        return2 = false;
+                        return;
+                    } else {
+                        return2 = false;
+                    }
                     highlight(value[0]);
                 } else {
-                highlight(value[0]);
+                    highlight(value[0]);
                 }
 
-            });
-            if(return2 == true){
-                return2 = false;
-                return;
             }
-
         } else {
             let value = [current + 7, current + 9];
+            //for(ab == 0; ab <=3; ab--)
             let thing = undefined;
             let thing2 = undefined;
             let run = false;
@@ -487,7 +510,7 @@ function move(where){
         }
     } else if(previousclick.pos - where > 10){
         //this checks for dino removal
-        console.log((previousclick.pos - where) % 9)
+
         if((previousclick.pos - where) % 9 == 0){
             let bb = (previousclick.pos - where)/18;
             remove[quantity] = previousclick.pos - 9*bb;
@@ -517,10 +540,10 @@ function move(where){
 }
 function remover(){
     for(let m = 0; m < remove.length; m++){
-        console.log(remove[m])
+
         for(let b = 0; b < dArray.length; b++){
             if(dArray[b].pos == remove[m]){
-                console.log("hi")
+
                 dArray[b].img.remove();
                 dArray.splice(b,1);
             }
