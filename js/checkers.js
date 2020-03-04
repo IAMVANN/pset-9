@@ -217,12 +217,17 @@ function highlighter(who){
                     value[0] += 7;
                       dArray.forEach((item, i) => {
 
-                        if(item.pos == value[0]){
-                            return2 = true;
-                            return ;
-                        }
+                          if(item.pos == value[0]){
+                              console.log("RAn")
+                              if(ab == 0){
+                                  return2 = true;
+                                  return ;
+                              } else {
+                                  return2 = true;
+                              }
+                          }
                     });
-                    if(return2 == true){
+                    if(return2 == true && ab == 0){
                         return2 = false;
                         return;
                     }
@@ -263,6 +268,7 @@ function highlighter(who){
                         return2 = false;
 
                         highlight(value[0]-9);
+                        ab = 4;
                     }
             }
 
@@ -275,16 +281,71 @@ function highlighter(who){
             let thing = undefined;
             let thing2 = undefined;
             let run = false;
-            for(i = dArray.length -1; i >= 0; i--){
+            for(let ab = 0; ab <= 3; ab++){
+                for(i = dArray.length -1; i >= 0; i--){
+                    if(dArray[i].pos == value[0]){
+                    thing = false;
+                    }
+                }
+                for(i = sArray.length - 1; i >= 0; i--){
+                    if(thing !== false){
+                        if(sArray[i].pos == value[0] && (sArray[i].pos % 8 !== 0)){
+                        thing = true;
+                        }
+                    }
+                }
+                if(thing == true){
+                    for(i = sArray.length -1; i>=0; i--){
+                    if(sArray[i].pos == value[0] + 7){
+                        run = true;
+                    }
+
+                }
+                    if(run == true){
+                        run = false;
+                    } else {
+                    highlight(value[0] + 7);
+                              }
+
+                }
+            }
+            for(let ab = 0; ab <= 3; ab++){
+                if(ab == 0 || (value[0]+ 9  - (ab*2)) %  (current % 8) == 0 && value[0] + 18 <=63){
+                    if(dArray[i].pos == value[1]){
+                    thing2 = false;
+                    }
+                    for(i = sArray.length - 1; i >= 0; i--){
+                        if(thing2 !== false){
+                            if(sArray[i].pos == value[1] && (sArray[i].pos -7) % 8 !== 0){
+                            thing2 = true;
+                            }
+                        }
+                    }
+                    if(thing2 == true){
+                    for(i = sArray.length -1; i>=0; i--){
+                        if(sArray[i].pos == value[1] + 9){
+                            run = true;
+                        }
+                    }
+                        if(run == true){
+                            run = false;
+                        } else {
+                        highlight(value[1] + 9);
+                        }
+                    }
+                }
+
+            }
+            /*for(i = dArray.length -1; i >= 0; i--){
                 if(dArray[i].pos == value[0]){
                 thing = false;
                 }
                 if(dArray[i].pos == value[1]){
                 thing2 = false
                 }
-            }
+            }*/
 
-            for(i = sArray.length - 1; i >= 0; i--){
+            /*for(i = sArray.length - 1; i >= 0; i--){
                 if(thing !== false){
                     if(sArray[i].pos == value[0] && (sArray[i].pos % 8 !== 0)){
                     thing = true;
@@ -295,8 +356,8 @@ function highlighter(who){
                     thing2 = true;
                     }
                 }
-            }
-            if(thing == true){
+            }*/
+        /*    if(thing == true){
                 for(i = sArray.length -1; i>=0; i--){
                 if(sArray[i].pos == value[0] + 7){
                     run = true;
@@ -309,8 +370,8 @@ function highlighter(who){
                 highlight(value[0] + 7);
                           }
 
-            }
-            if(thing2 == true){
+            }*/
+            /*if(thing2 == true){
             for(i = sArray.length -1; i>=0; i--){
                 if(sArray[i].pos == value[1] + 9){
                     run = true;
@@ -327,7 +388,7 @@ function highlighter(who){
             }
             if(thing2 == undefined){
                 highlight(value[1]);
-            }
+            }*/
         }
     } else if(who == "shark"){
 
@@ -335,18 +396,20 @@ function highlighter(who){
             //highlight
             let value = [current];
             for(let ab = 0; ab <= 3; ab++){
-                console.log(ab)
-                console.log(value[0])
-                console.log((value[0] - 7 - (ab * 3)) % 8);
                 if(ab == 0 || (((value[0] - 7 - (ab * 3)) % 8 == 0) && value[0] - 14 >= 0)){
                     value[0] -= 7;
-                    console.log("in");
+
                     sArray.forEach((item, i) => {
 
-                            if(item.pos == value[0]){
+                        if(item.pos == value[0]){
+                            if(ab == 0){
                                 return2 = true;
-                                return ;
+                                return;
+                            } else {
+                                return2 = true;
                             }
+                        }
+
 
                     });
                     if(return2 == true){
@@ -389,6 +452,7 @@ function highlighter(who){
                           return2 = false;
 
                           highlight(value[0] + 7);
+                          ab = 4;
                     }
 
                 }
@@ -406,10 +470,15 @@ function highlighter(who){
         //DO THIS NEXt, far right for DINO
           sArray.forEach((item, i) => {
 
-            if(item.pos == value[0]){
-                return2 = true;
-                return ;
-            }
+              if(item.pos == value[0]){
+                  console.log("RAn")
+                  if(ab == 0){
+                      return2 = true;
+                      return ;
+                  } else {
+                      return2 = true;
+                  }
+              }
         });
         if(return2 == true){
             return2 = false;
@@ -452,6 +521,7 @@ function highlighter(who){
                         return2 = false;
 
                         highlight(value[0] + 9);
+                        ab = 4;
                     }
                 highlight(value[0]);
 
