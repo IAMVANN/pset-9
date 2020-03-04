@@ -209,7 +209,7 @@ function highlighter(who){
             //DO THIS NEXt, far right for DINO
             for(let ab = 0; ab <= 3; ab++){
                 if(ab == 0 || (((value[0] + 7 + (ab * 2)) % 8 == 0) && value[0] + 14 <= 63)){
-                    console.log("in");
+
                     value[0] += 7;
                       dArray.forEach((item, i) => {
 
@@ -333,52 +333,73 @@ function highlighter(who){
 
         if(current % 8 == 0){
             //highlight
-            let value = [current - 7];
+            let value = [current];
+            for(let ab = 0; ab <= 3; ab++){
+                console.log(ab)
+                console.log(value[0])
+                console.log((value[0] - 7 - (ab * 3)) % 8);
+                if(ab == 0 || (((value[0] - 7 - (ab * 3)) % 8 == 0) && value[0] - 14 >= 0)){
+                    value[0] -= 7;
+                    console.log("in");
+                    sArray.forEach((item, i) => {
 
-            sArray.forEach((item, i) => {
+                            if(item.pos == value[0]){
+                                return2 = true;
+                                return ;
+                            }
 
-                if(item.pos == value[0]){
-                    return2 = true;
-                    return ;
-                }
-            });
-            if(return2 == true){
-                return2 = false;
-                return;
-            }
-
-            dArray.forEach((item, i) => {
-
-                if(item.pos == value[0]){
-                    dArray.forEach((object, o) => {
-                        if(object.pos == value[0] - 7){
-                            return3 = true;
-                            return;
-                        }
                     });
-                    if(return3 == true){
-                        return2 = true;
-                        return3 == false;
+                    if(return2 == true){
+                        return2 = false;
                         return;
                     }
 
+                    dArray.forEach((item, i) => {
 
-                    sArray.forEach((object, o) => {
-                        if(object.pos == value[0] - 7){
-                            return2 = true;
-                            return;
+                        if(item.pos == value[0]){
+                            dArray.forEach((object, o) => {
+                                if(object.pos == value[0] - 7){
+                                    return3 = true;
+                                    return;
+                                }
+                            });
+                            if(return3 == true){
+                                return2 = true;
+                                return3 == false;
+                                return;
+                            }
+
+
+                            sArray.forEach((object, o) => {
+                                if(object.pos == value[0] - 7){
+                                    return2 = true;
+                                    return;
+                                }
+                            });
+                            value[0] = value[0] - 7;
+
                         }
+
                     });
-                    value[0] = value[0] - 7;
-                    highlight(value[0]);
+                    if(return2 == true || ab == 3){
+                        if(ab == 0){
+                              return2 = false;
+                              return;
+                          }
+                          return2 = false;
+                          console.log(value[0])
+
+                          highlight(value[0]);
+                    }
+
                 }
 
-            });
-            if(return2 == true){
-                return2 = false;
-                return;
-            }
-            highlight(value[0])
+
+        }
+
+        highlight(value[0]);
+
+
 
 
     } else if((current + 9) % 8 == 0){
