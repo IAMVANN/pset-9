@@ -499,14 +499,17 @@ function move(where){
     if(where - previousclick.pos > 10){
         if((where - previousclick.pos) % 9 == 0){
             let bb = (where - previousclick.pos)/18;
+            for(let ab = 0; ab<bb; ab++){
+                remove[ab] = previousclick.pos + 9 * (1+ 2*ab);
+                console.log(remove)
+            }
 
-            remove[quantity] = previousclick.pos + 9*bb;
-            quantity++;
         } if((where - previousclick.pos) % 7 == 0){
             let bb = (where - previousclick.pos)/14;
-
-            remove[quantity] = previousclick.pos + 7*bb;
-            quantity++;
+            for(let ab = 0; ab<bb; ab++){
+                remove[ab] = previousclick.pos + 7 * (1+ 2*ab);
+                console.log(remove)
+            }
         }
     } else if(previousclick.pos - where > 10){
         //this checks for dino removal
@@ -522,9 +525,11 @@ function move(where){
         }
     }
     previousclick.pos = where;
-    if(quantity == []){
+    if(remove == []){
+        console.log("ran0")
 
     } else {
+        console.log("ran1")
         remover();
     }
 
@@ -540,7 +545,7 @@ function move(where){
 }
 function remover(){
     for(let m = 0; m < remove.length; m++){
-
+        console.log("ran2");
         for(let b = 0; b < dArray.length; b++){
             if(dArray[b].pos == remove[m]){
 
@@ -549,7 +554,7 @@ function remover(){
             }
         }
         for(let b = 0; b < sArray.length; b++){
-
+            console.log(remove[m]);
             if(sArray[b].pos == remove[m]){
                 sArray[b].img.remove();
                 sArray.splice(b,1);
