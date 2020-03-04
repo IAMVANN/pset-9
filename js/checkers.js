@@ -17,6 +17,7 @@ let dArray = [];
 let sArray = [];
 let remove = [];
 let return2 = false;
+let return22 = false;
 let return3 = false;
 let previousclick;
 ///////////////////// EVENT LISTENERS ///////////////////////////////
@@ -141,19 +142,20 @@ function highlighter(who){
 
             let value = [current];
             for(let ab = 0; ab <= 3; ab++){
-
-
-                if(ab == 0 || (((value[0] + 18 - (ab * 4)) % 8) && value[0] + 18 <= 63)){
+                if(ab == 0 || (((value[0] + 9 - (ab * 2)) % 8) && value[0] + 18 <= 63)){
                     value[0] += 9;
                     dArray.forEach((item, i) => {
                         if(item.pos == value[0]){
+                            console.log("RAn")
                             if(ab == 0){
                                 return2 = true;
                                 return ;
+                            } else {
+                                return2 = true;
                             }
                         }
                     });
-                    if(return2 == true){
+                    if(return2 == true && ab == 0){
                         return2 = false;
                         return;
                     }
@@ -176,6 +178,7 @@ function highlighter(who){
 
                             dArray.forEach((object, o) => {
                                 if(object.pos == value[0] + 9){
+                                    console.log("ASD")
                                     return2 = true;
                                     return;
                                 }
@@ -194,7 +197,8 @@ function highlighter(who){
                         }
                         return2 = false;
 
-                        highlight(value[0]-9);
+                        highlight(value[0] - 9);
+                        ab = 4;
                     }
 
                 }
@@ -258,12 +262,8 @@ function highlighter(who){
                         }
                         return2 = false;
 
-                        highlight(value[0]);
+                        highlight(value[0]-9);
                     }
-
-
-
-
             }
 
         }
@@ -286,12 +286,12 @@ function highlighter(who){
 
             for(i = sArray.length - 1; i >= 0; i--){
                 if(thing !== false){
-                    if(sArray[i].pos == value[0]){
+                    if(sArray[i].pos == value[0] && (sArray[i].pos % 8 !== 0)){
                     thing = true;
                     }
                 }
                 if(thing2 !== false){
-                    if(sArray[i].pos == value[1]){
+                    if(sArray[i].pos == value[1] && (sArray[i].pos -7) % 8 !== 0){
                     thing2 = true;
                     }
                 }
@@ -387,9 +387,8 @@ function highlighter(who){
                               return;
                           }
                           return2 = false;
-                          console.log(value[0])
 
-                          highlight(value[0]);
+                          highlight(value[0] + 7);
                     }
 
                 }
@@ -440,16 +439,22 @@ function highlighter(who){
                     }
                 });
                 value[0] = value[0] - 9;
-                highlight(value[0]);
-            } else {
-            highlight(value[0]);
             }
 
+
         });
-        if(return2 == true){
-            return2 = false;
-            return;
-        }
+        if(return2 == true || ab == 3){
+
+                        if(ab == 0){
+                            return2 = false;
+                            return;
+                        }
+                        return2 = false;
+
+                        highlight(value[0] + 9);
+                    }
+                highlight(value[0]);
+
 
     } else {
         let value = [current - 7, current - 9];
@@ -467,12 +472,12 @@ function highlighter(who){
 
         for(i = dArray.length - 1; i >= 0; i--){
             if(thing !== false){
-                if(dArray[i].pos == value[0]){
+                if(dArray[i].pos == value[0] && current % 8 !== 0){
                 thing = true;
                 }
             }
             if(thing2 !== false){
-                if(dArray[i].pos == value[1]){
+                if(dArray[i].pos == value[1] && (current + 9) % 8 !== 0){
                 thing2 = true;
                 }
             }
