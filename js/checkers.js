@@ -347,7 +347,7 @@ function highlighter(who){
     } else if((current + 9) % 8 == 0){
         let value = [current - 9];
         //DO THIS NEXt, far right for DINO
-          dArray.forEach((item, i) => {
+          sArray.forEach((item, i) => {
 
             if(item.pos == value[0]){
                 return2 = true;
@@ -359,10 +359,10 @@ function highlighter(who){
             return;
         }
 
-        sArray.forEach((item, i) => {
+        dArray.forEach((item, i) => {
 
             if(item.pos == value[0]){
-                sArray.forEach((object, o) => {
+                dArray.forEach((object, o) => {
                     if(object.pos == value[0] - 9){
                         return3 = true;
                         return;
@@ -398,30 +398,30 @@ function highlighter(who){
         let thing = undefined;
         let thing2 = undefined;
         let run = false;
-        for(i = dArray.length -1; i >= 0; i--){
-            if(dArray[i].pos == value[0]){
+        for(i = sArray.length -1; i >= 0; i--){
+            if(sArray[i].pos == value[0]){
             thing = false;
             }
-            if(dArray[i].pos == value[1]){
+            if(sArray[i].pos == value[1]){
             thing2 = false
             }
         }
 
-        for(i = sArray.length - 1; i >= 0; i--){
+        for(i = dArray.length - 1; i >= 0; i--){
             if(thing !== false){
-                if(sArray[i].pos == value[0]){
+                if(dArray[i].pos == value[0]){
                 thing = true;
                 }
             }
             if(thing2 !== false){
-                if(sArray[i].pos == value[1]){
+                if(dArray[i].pos == value[1]){
                 thing2 = true;
                 }
             }
         }
         if(thing == true){
-            for(i = sArray.length -1; i>=0; i--){
-            if(sArray[i].pos == value[0] - 7){
+            for(i = dArray.length -1; i>=0; i--){
+            if(dArray[i].pos == value[0] - 7){
                 run = true;
             }
 
@@ -434,8 +434,8 @@ function highlighter(who){
 
         }
         if(thing2 == true){
-        for(i = sArray.length -1; i>=0; i--){
-            if(sArray[i].pos == value[1] - 9){
+        for(i = dArray.length -1; i>=0; i--){
+            if(dArray[i].pos == value[1] - 9){
                 run = true;
             }
         }
