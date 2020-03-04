@@ -69,7 +69,7 @@ function init(){
     render();
 }
 function render(){
-    console.log(sArray)
+
     dArray.forEach((item, i) => {
         spots[dArray[i].pos].append(dArray[i].img);
 
@@ -138,52 +138,63 @@ function highlighter(who){
     if(who == "dino"){
         if(current % 8 == 0){
             //highlight
+
             let value = [current + 9];
+            for(let ab == 0; ab <= 3; ab++){
+                dArray.forEach((item, i) => {
 
-            dArray.forEach((item, i) => {
-
-                if(item.pos == value[0]){
-                    return2 = true;
-                    return ;
+                    if(item.pos == value[0]){
+                        if(ab == 0){
+                            return2 = true;
+                            return ;
+                        }
+                    }
+                });
+                if(return2 == true){
+                    return2 = false;
+                    return;
                 }
-            });
-            if(return2 == true){
-                return2 = false;
-                return;
-            }
 
-            sArray.forEach((item, i) => {
+                sArray.forEach((item, i) => {
 
-                if(item.pos == value[0]){
-                    sArray.forEach((object, o) => {
-                        if(object.pos == value[0] + 9){
-                            return3 = true;
+                    if(item.pos == value[0]){
+                        sArray.forEach((object, o) => {
+                            if(object.pos == value[0] + 9){
+                                return3 = true;
+                                return;
+                            }
+                        });
+                        if(return3 == true){
+                            return2 = true;
+                            return3 == false;
                             return;
                         }
-                    });
-                    if(return3 == true){
-                        return2 = true;
-                        return3 == false;
-                        return;
+
+
+                        dArray.forEach((object, o) => {
+                            if(object.pos == value[0] + 9){
+                                return2 = true;
+                                return;
+                            }
+                        });
+                        value[0] = value[0] + 9;
+
+                        highlight(value[0]);
                     }
 
+                });
+                if(return2 == true){
+                    if(ab == 0){
+                        return2 = false;
+                        return;
+                    }
+                    return2 = false;
 
-                    dArray.forEach((object, o) => {
-                        if(object.pos == value[0] + 9){
-                            return2 = true;
-                            return;
-                        }
-                    });
-                    value[0] = value[0] + 9;
-                    highlight(value[0]);
                 }
-
-            });
-            if(return2 == true){
-                return2 = false;
-                return;
+                highlight(value[0]);
             }
-            highlight(value[0])
+
+
         } else if((current - 7) % 8 == 0){
             let value = [current + 7];
             //DO THIS NEXt, far right for DINO
@@ -474,14 +485,15 @@ function move(where){
             remove[quantity] = previousclick.pos + 7*bb;
             quantity++;
         }
-    } else if(previousclick.pos - where < -10){
+    } else if(previousclick.pos - where > 10){
         //this checks for dino removal
-        if((previousclick.pos - work) % 9 == 0){
-            let bb = (previousclick.pos - work)/18;
+        console.log((previousclick.pos - where) % 9)
+        if((previousclick.pos - where) % 9 == 0){
+            let bb = (previousclick.pos - where)/18;
             remove[quantity] = previousclick.pos - 9*bb;
             quantity++;
-        } if((previousclick.pos - work) % 7 == 0){
-            let bb = (previousclick.pos - work)/14;
+        } if((previousclick.pos - where) % 7 == 0){
+            let bb = (previousclick.pos - where)/14;
             remove[quantity] = previousclick.pos - 7*bb;
             quantity++;
         }
@@ -505,8 +517,10 @@ function move(where){
 }
 function remover(){
     for(let m = 0; m < remove.length; m++){
+        console.log(remove[m])
         for(let b = 0; b < dArray.length; b++){
             if(dArray[b].pos == remove[m]){
+                console.log("hi")
                 dArray[b].img.remove();
                 dArray.splice(b,1);
             }
