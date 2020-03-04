@@ -143,8 +143,6 @@ function highlighter(who){
             for(let ab = 0; ab <= 3; ab++){
 
 
-                let a = (value[0] + 18 - (ab * 4)) % 8 ;
-
                 if(ab == 0 || (((value[0] + 18 - (ab * 4)) % 8) && value[0] + 18 <= 63)){
                     value[0] += 9;
                     dArray.forEach((item, i) => {
@@ -207,12 +205,12 @@ function highlighter(who){
 
 
         } else if((current - 7) % 8 == 0){
-            let value = [current + 7];
+            let value = [current];
             //DO THIS NEXt, far right for DINO
             for(let ab = 0; ab <= 3; ab++){
-                if((current - 7) % 8 == 0){
-
-
+                if(ab == 0 || (((value[0] + 7 + (ab * 2)) % 8 == 0) && value[0] + 14 <= 63)){
+                    console.log("in");
+                    value[0] += 7;
                       dArray.forEach((item, i) => {
 
                         if(item.pos == value[0]){
@@ -248,24 +246,29 @@ function highlighter(who){
                                 }
                             });
                             value[0] = value[0] + 7;
-                            highlight(value[0]);
-                        } else {
-                        highlight(value[0]);
+
                         }
 
                     });
-                    if(ab == 0){
+                    if(return2 == true || ab == 3){
+
+                        if(ab == 0){
+                            return2 = false;
+                            return;
+                        }
                         return2 = false;
-                        return;
-                    } else {
-                        return2 = false;
+
+                        highlight(value[0]);
                     }
-                    highlight(value[0]);
-                } else {
-                    highlight(value[0]);
-                }
+
+
+
 
             }
+
+        }
+
+        highlight(value[0]);
         } else {
             let value = [current + 7, current + 9];
             //for(ab == 0; ab <=3; ab--)
@@ -501,14 +504,14 @@ function move(where){
             let bb = (where - previousclick.pos)/18;
             for(let ab = 0; ab<bb; ab++){
                 remove[ab] = previousclick.pos + 9 * (1+ 2*ab);
-                console.log(remove)
+
             }
 
         } if((where - previousclick.pos) % 7 == 0){
             let bb = (where - previousclick.pos)/14;
             for(let ab = 0; ab<bb; ab++){
                 remove[ab] = previousclick.pos + 7 * (1+ 2*ab);
-                console.log(remove)
+
             }
         }
     } else if(previousclick.pos - where > 10){
@@ -516,20 +519,24 @@ function move(where){
 
         if((previousclick.pos - where) % 9 == 0){
             let bb = (previousclick.pos - where)/18;
-            remove[quantity] = previousclick.pos - 9*bb;
-            quantity++;
+            for(let ab = 0; ab<bb; ab++){
+                remove[ab] = previousclick.pos - 9 * (1+2*ab);
+            }
+
+
         } if((previousclick.pos - where) % 7 == 0){
             let bb = (previousclick.pos - where)/14;
-            remove[quantity] = previousclick.pos - 7*bb;
-            quantity++;
+            for(let ab = 0; ab<bb; ab++){
+                remove[ab] = previousclick.pos - 7 * (1+2*ab);
+            }
         }
     }
     previousclick.pos = where;
     if(remove == []){
-        console.log("ran0")
+
 
     } else {
-        console.log("ran1")
+
         remover();
     }
 
@@ -545,7 +552,7 @@ function move(where){
 }
 function remover(){
     for(let m = 0; m < remove.length; m++){
-        console.log("ran2");
+
         for(let b = 0; b < dArray.length; b++){
             if(dArray[b].pos == remove[m]){
 
@@ -554,7 +561,7 @@ function remover(){
             }
         }
         for(let b = 0; b < sArray.length; b++){
-            console.log(remove[m]);
+
             if(sArray[b].pos == remove[m]){
                 sArray[b].img.remove();
                 sArray.splice(b,1);
