@@ -173,13 +173,16 @@ function dinoChecker(who){
             for(let b = 1; b <= maxDoubleJumps; b++){
                 if(jumpstop == false){
                     sArray.forEach((item, i) => {
-                        if(item.pos == value[0] + 18){
+                        if(item.pos == value[0] + 9){
                             doubleJump = true;
                         }
                     });
                     if(doubleJump == true){
 
                             value[0] += 18;
+                            if(value[0] > 63){
+                                jumpstop = true;
+                            }
                             sArray.forEach((item, i) => {
                                 if(item.pos == value[0]){
                                     jumpstop = true;
@@ -193,7 +196,7 @@ function dinoChecker(who){
 
                             if(jumpstop != true){
                                 ran = true;
-                                highlight[value[0]];
+                                highlight(value[0]);
                             }
                     } else {
                         jumpstop = true;
@@ -239,34 +242,40 @@ function dinoChecker(who){
             maxDoubleJumps = 0;
         }
         if(maxDoubleJumps > 0){
+
             for(let b = 1; b <= maxDoubleJumps; b++){
                 if(jumpstop == false){
                     sArray.forEach((item, i) => {
-                        if(item.pos == value[0] + 14){
+                        if(item.pos == value[0] + 7){
                             doubleJump = true;
                         }
                     });
                     if(doubleJump == true){
 
                             value[0] += 14;
+                            if(value[0] > 63){
+                                jumpstop = true;
+                            }
                             sArray.forEach((item, i) => {
                                 if(item.pos == value[0]){
                                     jumpstop = true;
                                 }
                             });
                             dArray.forEach((item, i) => {
+
                                 if(item.pos == value[0]){
+
                                     jumpstop = true;
                                 }
                             });
 
-                            if(jumpstop != true){
+                            if(jumpstop == false){
 
                                 ran = true;
-                                highlight[value[0]];
+                                highlight(value[0]);
                             }
                     } else {
-                        console.log("ASD")
+
                         jumpstop = true;
 
                     }
@@ -275,7 +284,7 @@ function dinoChecker(who){
         }
         if(ran == false) {
             value[0] += 7;
-            console.log("ASDasdf")
+
             dArray.forEach((item, i) => {
                 if(item.pos == value[0]){
                     noJump = true;
@@ -318,27 +327,33 @@ function dinoChecker(who){
                     for(let b = 1; b <= maxDoubleJumps; b++){
                         if(jumpstop == false){
                             sArray.forEach((item, i) => {
-                                if(item.pos == value[0] + 18){
+                                if(item.pos == value[0] + 9 && (value[0] + 2) % 8 !== 0 ){
                                     doubleJump = true;
                                 }
                             });
                             if(doubleJump == true){
 
                                     value[0] += 18;
+                                    if(value[0] > 63){
+                                        jumpstop = true;
+                                    }
                                     sArray.forEach((item, i) => {
                                         if(item.pos == value[0]){
+                                            console.log(item.pos)
                                             jumpstop = true;
                                         }
                                     });
                                     dArray.forEach((item, i) => {
                                         if(item.pos == value[0]){
+                                            console.log(item.pos)
                                             jumpstop = true;
                                         }
                                     });
 
                                     if(jumpstop != true){
                                         ran = true;
-                                        highlight[value[0]];
+
+                                        highlight(value[0]);
                                     }
                             } else {
                                 jumpstop = true;
@@ -386,7 +401,7 @@ function dinoChecker(who){
                     for(let b = 1; b <= maxDoubleJumps; b++){
                         if(jumpstop == false){
                             sArray.forEach((item, i) => {
-                                if(item.pos == value[1] + 14){
+                                if(item.pos == value[1] + 7 && (value[1] - 1) % 8 !== 0){
                                     doubleJump = true;
                                 }
                             });
@@ -406,10 +421,10 @@ function dinoChecker(who){
 
                                     if(jumpstop != true){
                                         ran = true;
-                                        highlight[value[1]];
+                                        highlight(value[1]);
                                     }
                             } else {
-                                console.log("ASD")
+
                                 jumpstop = true;
 
                             }
@@ -459,13 +474,16 @@ function sharkChecker(who){
               for(let b = 1; b <= maxDoubleJumps; b++){
                   if(jumpstop == false){
                       dArray.forEach((item, i) => {
-                          if(item.pos == value[0] - 14){
+                          if(item.pos == value[0] - 7){
                               doubleJump = true;
                           }
                       });
                       if(doubleJump == true){
 
                               value[0] -= 14;
+                              if(value[0] < 0){
+                                  jumpstop = true;
+                              }
                               dArray.forEach((item, i) => {
                                   if(item.pos == value[0]){
                                       jumpstop = true;
@@ -479,10 +497,10 @@ function sharkChecker(who){
 
                               if(jumpstop != true){
                                   ran = true;
-                                  highlight[value[0]];
+                                  highlight(value[0]);
                               }
                       } else {
-                          console.log("ASD")
+
                           jumpstop = true;
 
                       }
@@ -528,13 +546,16 @@ function sharkChecker(who){
               for(let b = 1; b <= maxDoubleJumps; b++){
                   if(jumpstop == false){
                       dArray.forEach((item, i) => {
-                          if(item.pos == value[0] - 18){
+                          if(item.pos == value[0] - 9){
                               doubleJump = true;
                           }
                       });
                       if(doubleJump == true){
 
                               value[0] -= 18;
+                              if(value[0] < 0){
+                                  jumpstop = true;
+                              }
                               dArray.forEach((item, i) => {
                                   if(item.pos == value[0]){
                                       jumpstop = true;
@@ -548,7 +569,7 @@ function sharkChecker(who){
 
                               if(jumpstop != true){
                                   ran = true;
-                                  highlight[value[0]];
+                                  highlight(value[0]);
                               }
                       } else {
                           jumpstop = true;
@@ -600,7 +621,7 @@ function sharkChecker(who){
                       for(let b = 1; b <= maxDoubleJumps; b++){
                           if(jumpstop == false){
                               dArray.forEach((item, i) => {
-                                  if(item.pos == value[0] + 18){
+                                  if(item.pos == value[0] + 9 && (value[0] - 1) % 8 !== 0){
                                       doubleJump = true;
                                   }
                               });
@@ -620,7 +641,7 @@ function sharkChecker(who){
 
                                       if(jumpstop != true){
                                           ran = true;
-                                          highlight[value[0]];
+                                          highlight(value[0]);
                                       }
                               } else {
                                   jumpstop = true;
@@ -631,6 +652,9 @@ function sharkChecker(who){
                   }
                   if(ran == false) {
                       value[0] -= 9;
+                      if(value[0] < 0){
+                          jumpstop = true;
+                      }
                       sArray.forEach((item, i) => {
                           if(item.pos == value[0]){
                               noJump = true;
@@ -668,13 +692,16 @@ function sharkChecker(who){
                       for(let b = 1; b <= maxDoubleJumps; b++){
                           if(jumpstop == false){
                               dArray.forEach((item, i) => {
-                                  if(item.pos == value[1] - 14){
+                                  if(item.pos == value[1] - 7 && (value[1] - 6) % 8){
                                       doubleJump = true;
                                   }
                               });
                               if(doubleJump == true){
 
                                       value[1] -= 14;
+                                      if(value[0] < 0){
+                                          jumpstop = true;
+                                      }
                                       dArray.forEach((item, i) => {
                                           if(item.pos == value[1]){
                                               jumpstop = true;
@@ -688,10 +715,10 @@ function sharkChecker(who){
 
                                       if(jumpstop != true){
                                           ran = true;
-                                          highlight[value[1]];
+                                          highlight(value[1]);
                                   }
                               } else {
-                                  console.log("ASD")
+
                                   jumpstop = true;
 
                               }
