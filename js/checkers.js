@@ -139,14 +139,167 @@ function highlighter(who){
 
 
     if(who == "dino"){
+        dinoChecker(who);
+
     } else if(who == "shark"){
-
+        sharkChecker(who);
     } else if(who == "Kingdino"){
-        
+        kingDinoChecker(who);
     } else if(who == "Kingshark"){
-
+        kingSharkChecker(who);
     }
 
+
+}
+function dinoChecker(who){
+    if(current % 8 == 0){
+        let value = [current];
+        let noJump = false;
+        let maxDoubleJumps;
+        let doubleJump = false;
+        let jumpstop = false;
+        let ran = false;
+        let z = Math.floor(value[0]/8);
+        if(z == 0 || z == 1){
+            maxDoubleJumps = 3;
+        } else if(z == 2 || z == 3){
+            maxDoubleJumps = 2;
+        } else if(z == 4 || z == 5){
+            maxDoubleJumps = 1;
+        } else if(z == 6 || z == 7){
+            maxDoubleJumps = 0;
+        }
+        if(maxDoubleJumps > 0){
+            for(let b = 1; b <= maxDoubleJumps; b++){
+                if(jumpstop == false){
+                    sArray.forEach((item, i) => {
+                        if(item.pos == value[0] + 18){
+                            doubleJump = true;
+                        }
+                    });
+                    if(doubleJump == true){
+
+                            value[0] += 18;
+                            sArray.forEach((item, i) => {
+                                if(item.pos == value[0]){
+                                    jumpstop = true;
+                                }
+                            });
+                            dArray.forEach((item, i) => {
+                                if(item.pos == value[0]){
+                                    jumpstop = true;
+                                }
+                            });
+
+                            if(jumpstop != true){
+                                let ran;
+                                highlight[value[0]];
+                            }
+                    } else {
+                        jumpstop = true;
+
+                    }
+                }
+            }
+        }
+        if(ran == false) {
+            value[0] += 9;
+            dArray.forEach((item, i) => {
+                if(item.pos == value[0]){
+                    noJump = true;
+                }
+            });
+            sArray.forEach((item, i) => {
+                if(item.pos == value[0]){
+                    noJump = true;
+                }
+            });
+            if(noJump == false){
+                highlight(value[0]);
+            }
+
+        }
+
+
+    } else if((current - 7) % 8 == 0){
+        let value = [current];
+        let noJump = false;
+        let maxDoubleJumps;
+        let doubleJump = false;
+        let jumpstop = false;
+        let ran = false;
+        let z = Math.floor((value[0] - 7)/8);
+        if(z == 0 || z == 1){
+            maxDoubleJumps = 3;
+        } else if(z == 2 || z == 3){
+            maxDoubleJumps = 2;
+        } else if(z == 4 || z == 5){
+            maxDoubleJumps = 1;
+        } else if(z == 6 || z == 7){
+            maxDoubleJumps = 0;
+        }
+        if(maxDoubleJumps > 0){
+            for(let b = 1; b <= maxDoubleJumps; b++){
+                if(jumpstop == false){
+                    sArray.forEach((item, i) => {
+                        if(item.pos == value[0] + 14){
+                            doubleJump = true;
+                        }
+                    });
+                    if(doubleJump == true){
+
+                            value[0] += 14;
+                            sArray.forEach((item, i) => {
+                                if(item.pos == value[0]){
+                                    jumpstop = true;
+                                }
+                            });
+                            dArray.forEach((item, i) => {
+                                if(item.pos == value[0]){
+                                    jumpstop = true;
+                                }
+                            });
+
+                            if(jumpstop != true){
+                                let ran;
+                                highlight[value[0]];
+                            }
+                    } else {
+                        console.log("ASD")
+                        jumpstop = true;
+
+                    }
+                }
+            }
+        }
+        if(ran == false) {
+            value[0] += 7;
+            dArray.forEach((item, i) => {
+                if(item.pos == value[0]){
+                    noJump = true;
+                }
+            });
+            sArray.forEach((item, i) => {
+                if(item.pos == value[0]){
+                    noJump = true;
+                }
+            });
+            if(noJump == false){
+                highlight(value[0]);
+            }
+
+        }
+
+
+    }
+}
+function sharkChecker(who){
+
+}
+function kingDinoChecker(who){
+
+}
+function kingSharkChecker(who){
 
 }
 function highlight(value){
