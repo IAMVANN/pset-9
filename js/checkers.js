@@ -192,7 +192,7 @@ function dinoChecker(who){
                             });
 
                             if(jumpstop != true){
-                                let ran;
+                                ran = true;
                                 highlight[value[0]];
                             }
                     } else {
@@ -261,7 +261,8 @@ function dinoChecker(who){
                             });
 
                             if(jumpstop != true){
-                                let ran;
+
+                                ran = true;
                                 highlight[value[0]];
                             }
                     } else {
@@ -274,6 +275,7 @@ function dinoChecker(who){
         }
         if(ran == false) {
             value[0] += 7;
+            console.log("ASDasdf")
             dArray.forEach((item, i) => {
                 if(item.pos == value[0]){
                     noJump = true;
@@ -291,10 +293,431 @@ function dinoChecker(who){
         }
 
 
+    } else {
+        let value = [current, current];
+        for(let jk = 0; jk <= 1; jk++){
+
+            if(jk == 0){
+                //+9
+                let noJump = false;
+                let maxDoubleJumps;
+                let doubleJump = false;
+                let jumpstop = false;
+                let ran = false;
+                let z = 7 - (current % 8);
+                if(z == 0 || z == 1){
+                    maxDoubleJumps = 3;
+                } else if(z == 2 || z == 3){
+                    maxDoubleJumps = 2;
+                } else if(z == 4 || z == 5){
+                    maxDoubleJumps = 1;
+                } else if(z == 6 || z == 7){
+                    maxDoubleJumps = 0;
+                }
+                if(maxDoubleJumps > 0){
+                    for(let b = 1; b <= maxDoubleJumps; b++){
+                        if(jumpstop == false){
+                            sArray.forEach((item, i) => {
+                                if(item.pos == value[0] + 18){
+                                    doubleJump = true;
+                                }
+                            });
+                            if(doubleJump == true){
+
+                                    value[0] += 18;
+                                    sArray.forEach((item, i) => {
+                                        if(item.pos == value[0]){
+                                            jumpstop = true;
+                                        }
+                                    });
+                                    dArray.forEach((item, i) => {
+                                        if(item.pos == value[0]){
+                                            jumpstop = true;
+                                        }
+                                    });
+
+                                    if(jumpstop != true){
+                                        ran = true;
+                                        highlight[value[0]];
+                                    }
+                            } else {
+                                jumpstop = true;
+
+                            }
+                        }
+                    }
+                }
+                if(ran == false) {
+                    value[0] += 9;
+                    dArray.forEach((item, i) => {
+                        if(item.pos == value[0]){
+                            noJump = true;
+                        }
+                    });
+                    sArray.forEach((item, i) => {
+                        if(item.pos == value[0]){
+                            noJump = true;
+                        }
+                    });
+                    if(noJump == false){
+                        highlight(value[0]);
+                    }
+
+                }
+
+            } else if(jk == 1){
+                //+7
+                let noJump = false;
+                let maxDoubleJumps;
+                let doubleJump = false;
+                let jumpstop = false;
+                let ran = false;
+                let z = current % 8;
+                if(z == 0 || z == 1){
+                    maxDoubleJumps = 3;
+                } else if(z == 2 || z == 3){
+                    maxDoubleJumps = 2;
+                } else if(z == 4 || z == 5){
+                    maxDoubleJumps = 1;
+                } else if(z == 6 || z == 7){
+                    maxDoubleJumps = 0;
+                }
+                if(maxDoubleJumps > 0){
+                    for(let b = 1; b <= maxDoubleJumps; b++){
+                        if(jumpstop == false){
+                            sArray.forEach((item, i) => {
+                                if(item.pos == value[1] + 14){
+                                    doubleJump = true;
+                                }
+                            });
+                            if(doubleJump == true){
+
+                                    value[1] += 14;
+                                    sArray.forEach((item, i) => {
+                                        if(item.pos == value[1]){
+                                            jumpstop = true;
+                                        }
+                                    });
+                                    dArray.forEach((item, i) => {
+                                        if(item.pos == value[1]){
+                                            jumpstop = true;
+                                        }
+                                    });
+
+                                    if(jumpstop != true){
+                                        ran = true;
+                                        highlight[value[1]];
+                                    }
+                            } else {
+                                console.log("ASD")
+                                jumpstop = true;
+
+                            }
+                        }
+                    }
+                }
+                if(ran == false) {
+                    value[1] += 7;
+                    dArray.forEach((item, i) => {
+                        if(item.pos == value[1]){
+                            noJump = true;
+                        }
+                    });
+                    sArray.forEach((item, i) => {
+                        if(item.pos == value[1]){
+                            noJump = true;
+                        }
+                    });
+                    if(noJump == false){
+                        highlight(value[1]);
+                    }
+
+                }
+            }
+        }
     }
 }
 function sharkChecker(who){
+      if(current % 8 == 0){
+          let value = [current];
+          let noJump = false;
+          let maxDoubleJumps;
+          let doubleJump = false;
+          let jumpstop = false;
+          let ran = false;
+          let z = Math.floor((value[0] - 7)/8);
+          if(z == 0 || z == 1){
+              maxDoubleJumps = 3;
+          } else if(z == 2 || z == 3){
+              maxDoubleJumps = 2;
+          } else if(z == 4 || z == 5){
+              maxDoubleJumps = 1;
+          } else if(z == 6 || z == 7){
+              maxDoubleJumps = 0;
+          }
+          if(maxDoubleJumps > 0){
+              for(let b = 1; b <= maxDoubleJumps; b++){
+                  if(jumpstop == false){
+                      dArray.forEach((item, i) => {
+                          if(item.pos == value[0] - 14){
+                              doubleJump = true;
+                          }
+                      });
+                      if(doubleJump == true){
 
+                              value[0] -= 14;
+                              dArray.forEach((item, i) => {
+                                  if(item.pos == value[0]){
+                                      jumpstop = true;
+                                  }
+                              });
+                              sArray.forEach((item, i) => {
+                                  if(item.pos == value[0]){
+                                      jumpstop = true;
+                                  }
+                              });
+
+                              if(jumpstop != true){
+                                  ran = true;
+                                  highlight[value[0]];
+                              }
+                      } else {
+                          console.log("ASD")
+                          jumpstop = true;
+
+                      }
+                  }
+              }
+          }
+          if(ran == false) {
+              value[0] -= 7;
+              sArray.forEach((item, i) => {
+                  if(item.pos == value[0]){
+                      noJump = true;
+                  }
+              });
+              dArray.forEach((item, i) => {
+                  if(item.pos == value[0]){
+                      noJump = true;
+                  }
+              });
+              if(noJump == false){
+                  highlight(value[0]);
+              }
+
+          }
+
+      } else if((current - 7) % 8 == 0){
+          let value = [current];
+          let noJump = false;
+          let maxDoubleJumps;
+          let doubleJump = false;
+          let jumpstop = false;
+          let ran = false;
+          let z = Math.floor(value[0]/8);
+          if(z == 0 || z == 1){
+              maxDoubleJumps = 3;
+          } else if(z == 2 || z == 3){
+              maxDoubleJumps = 2;
+          } else if(z == 4 || z == 5){
+              maxDoubleJumps = 1;
+          } else if(z == 6 || z == 7){
+              maxDoubleJumps = 0;
+          }
+          if(maxDoubleJumps > 0){
+              for(let b = 1; b <= maxDoubleJumps; b++){
+                  if(jumpstop == false){
+                      dArray.forEach((item, i) => {
+                          if(item.pos == value[0] - 18){
+                              doubleJump = true;
+                          }
+                      });
+                      if(doubleJump == true){
+
+                              value[0] -= 18;
+                              dArray.forEach((item, i) => {
+                                  if(item.pos == value[0]){
+                                      jumpstop = true;
+                                  }
+                              });
+                              sArray.forEach((item, i) => {
+                                  if(item.pos == value[0]){
+                                      jumpstop = true;
+                                  }
+                              });
+
+                              if(jumpstop != true){
+                                  ran = true;
+                                  highlight[value[0]];
+                              }
+                      } else {
+                          jumpstop = true;
+
+                      }
+                  }
+              }
+          }
+          if(ran == false) {
+              value[0] -= 9;
+              sArray.forEach((item, i) => {
+                  if(item.pos == value[0]){
+                      noJump = true;
+                  }
+              });
+              dArray.forEach((item, i) => {
+                  if(item.pos == value[0]){
+                      noJump = true;
+                  }
+              });
+              if(noJump == false){
+                  highlight(value[0]);
+              }
+          }
+
+
+      } else {
+          let value = [current, current];
+          for(let jk = 0; jk <= 1; jk++){
+
+              if(jk == 0){
+                  //+9
+                  let noJump = false;
+                  let maxDoubleJumps;
+                  let doubleJump = false;
+                  let jumpstop = false;
+                  let ran = false;
+                  let z = 7 - (current % 8);
+                  if(z == 0 || z == 1){
+                      maxDoubleJumps = 3;
+                  } else if(z == 2 || z == 3){
+                      maxDoubleJumps = 2;
+                  } else if(z == 4 || z == 5){
+                      maxDoubleJumps = 1;
+                  } else if(z == 6 || z == 7){
+                      maxDoubleJumps = 0;
+                  }
+                  if(maxDoubleJumps > 0){
+                      for(let b = 1; b <= maxDoubleJumps; b++){
+                          if(jumpstop == false){
+                              dArray.forEach((item, i) => {
+                                  if(item.pos == value[0] + 18){
+                                      doubleJump = true;
+                                  }
+                              });
+                              if(doubleJump == true){
+
+                                      value[0] -= 18;
+                                      dArray.forEach((item, i) => {
+                                          if(item.pos == value[0]){
+                                              jumpstop = true;
+                                          }
+                                      });
+                                      sArray.forEach((item, i) => {
+                                          if(item.pos == value[0]){
+                                              jumpstop = true;
+                                          }
+                                      });
+
+                                      if(jumpstop != true){
+                                          ran = true;
+                                          highlight[value[0]];
+                                      }
+                              } else {
+                                  jumpstop = true;
+
+                              }
+                          }
+                      }
+                  }
+                  if(ran == false) {
+                      value[0] -= 9;
+                      sArray.forEach((item, i) => {
+                          if(item.pos == value[0]){
+                              noJump = true;
+                          }
+                      });
+                      dArray.forEach((item, i) => {
+                          if(item.pos == value[0]){
+                              noJump = true;
+                          }
+                      });
+                      if(noJump == false){
+                          highlight(value[0]);
+                      }
+
+                  }
+
+              } else if(jk == 1){
+                  //+7
+                  let noJump = false;
+                  let maxDoubleJumps;
+                  let doubleJump = false;
+                  let jumpstop = false;
+                  let ran = false;
+                  let z = current % 8;
+                  if(z == 0 || z == 1){
+                      maxDoubleJumps = 3;
+                  } else if(z == 2 || z == 3){
+                      maxDoubleJumps = 2;
+                  } else if(z == 4 || z == 5){
+                      maxDoubleJumps = 1;
+                  } else if(z == 6 || z == 7){
+                      maxDoubleJumps = 0;
+                  }
+                  if(maxDoubleJumps > 0){
+                      for(let b = 1; b <= maxDoubleJumps; b++){
+                          if(jumpstop == false){
+                              dArray.forEach((item, i) => {
+                                  if(item.pos == value[1] - 14){
+                                      doubleJump = true;
+                                  }
+                              });
+                              if(doubleJump == true){
+
+                                      value[1] -= 14;
+                                      dArray.forEach((item, i) => {
+                                          if(item.pos == value[1]){
+                                              jumpstop = true;
+                                          }
+                                      });
+                                      sArray.forEach((item, i) => {
+                                          if(item.pos == value[1]){
+                                              jumpstop = true;
+                                          }
+                                      });
+
+                                      if(jumpstop != true){
+                                          ran = true;
+                                          highlight[value[1]];
+                                  }
+                              } else {
+                                  console.log("ASD")
+                                  jumpstop = true;
+
+                              }
+                          }
+                      }
+                  }
+                  if(ran == false) {
+                      value[1] -= 7;
+                      sArray.forEach((item, i) => {
+                          if(item.pos == value[1]){
+                              noJump = true;
+                          }
+                      });
+                      dArray.forEach((item, i) => {
+                          if(item.pos == value[1]){
+                              noJump = true;
+                          }
+                      });
+                      if(noJump == false){
+                          highlight(value[1]);
+                      }
+
+                  }
+              }
+          }
+      }
 }
 function kingDinoChecker(who){
 
