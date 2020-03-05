@@ -21,3 +21,107 @@
     top : 50px;
     right : 20px;
 }
+
+/* NAVIAGTION BAR */
+
+.nav ul {
+  list-style: none;
+  background: black;
+  text-align: center;
+  padding: 0: margin:0;
+}
+
+.nav li {
+  display: inline-block;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  font-size: 25px;
+  line-height: 55px;
+  margin: 1%;
+  text-align: center;
+  width: 450px;
+}
+
+.nav a:hover {
+  background: #333333;
+  transition: 0.4s;
+}
+
+#title {
+  background-color: black;
+  border: 5px solid black;
+  color: white;
+  line-height: 55px;
+  text-align: center;
+  width: auto;
+}
+
+/* PAGE BACKGROUNDS */
+body{
+  background: url("../img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* INDEX */
+
+
+.introcontainer{
+  background-color: rgba(0, 0, 0, 0.45);
+  margin-top: 1%;
+  padding-bottom: 2%;
+  border: 5px solid black;
+  color: white;
+  line-height: 55px;
+  text-align: center;
+  width: auto;
+}
+
+#introtext{
+    margin: 0 auto;
+    font-family: "Major Mono Display", monospace;
+    font-size: 30px;
+    margin: 2%;
+    background-blend-mode: color-dodge;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#introtext2{
+    margin: 0 auto;
+    font-family: "Major Mono Display", monospace;
+    font-size: 30px;
+    margin: 2%;
+    background-blend-mode: color-dodge;
+    color: black;
+    background: white;
+}
+
+/* BRICK BREAKER */
+
+#bREAKBOARD{
+  border: 3px solid white;"
+}
+
+#start{
+  color: black;
+  background: white;
+}
+
+#text{
+  border: black;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+#bREAK{
+  width: 1024px;
+  height: 512px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+#paddle{
+    background: black;
+}

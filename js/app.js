@@ -40,6 +40,7 @@ window.onload = function(){
     start.id = "start";
     start.innerHTML = "Start";
     breaker.append(start);
+    alert("Gravity is wierd, so its hard to win, but click o for win screen.")
 }
 breaker.onclick = init;
 document.addEventListener("keydown", direction);
@@ -120,6 +121,15 @@ function direction(event){
         turn = "left";
     } else if (event.keyCode == 39){
         turn = "right";
+    } else if (event.keyCode == 79){
+        alert("ASD")
+        array.forEach((item, i) => {
+            item.forEach((object, a) => {
+                item[a] = "0";
+            });
+
+        });
+        console.log(array)
     }
 }
 function ballmecanics(){
@@ -151,29 +161,29 @@ function ballmecanics(){
               motion = "bounceinit";
               reason = "paddle";
               item[a] = "0";
-              console.log("top")
+
           } else if(ball.xrange2 >= xVal[a] && ball.xrange2 <= xVal[a] + 80 && ball.yrange < yVal[i] + 8 && ball.yrange >=  yVal[i]){
               motion = "bounceinit";
               reason = "paddle";
               item[a] = "0";
-               console.log("top")
+
             //bottom
             } else if (ball.xrange <= xVal[a] + 80 && ball.xrange >= xVal[a] && ball.yrange - 20 <= yVal[i] + 64  && ball.yrange - 20 >= yVal[i]  + 56){
               motion = "bounceinit";
               reason = "top";
               item[a] = "0";
-               console.log("bottom")
+
           } else if (ball.xrange <= xVal[a] + 8 && ball.xrange >= xVal[a] && ball.yrange - 20 <= yVal[i] + 56  && ball.yrange - 20 >= yVal[i]) {
               motion = "bounceinit";
               //left
               reason = "right";
               item[a] = "0";
-              console.log("left")
+
           } else if (ball.xrange <= xVal[a] + 88 && ball.xrange >= xVal[a] + 80 && ball.yrange - 20 <= yVal[i] + 56  && ball.yrange - 20 >= yVal[i]){
               motion = "bounceinit";
               reason = "left";
               //right
-              console.log("right")
+
               item[a] = "0";
           }
 
@@ -346,13 +356,13 @@ function winner(){
 
             } else {
                 counter++;
-                console.log(counter);
+
             }
         });
 
     });
-    console.log("winner ran")
-    if(counter == "0"){
+
+    if(counter == 0){
         started = false;
         motion = undefined;
         reason = undefined;
@@ -365,8 +375,9 @@ function winner(){
         text = document.createElement("h2");
         text.id = "text";
         text.innerHTML = "YOU WIN!!!";
-        loseScreen.append(start);
-        loseScreen.prepend(text)
+        winScreen.append(start);
+        alert("You win!!!!")
+        winScreen.prepend(text)
         breaker.append(winScreen);
 
     } else {
