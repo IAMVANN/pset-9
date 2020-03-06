@@ -12,7 +12,9 @@
   background-color: black;
 }
 
-
+#Checkboard{
+  border: solid 10px black;
+}
 
 /* BACKGROUND */
 body {
